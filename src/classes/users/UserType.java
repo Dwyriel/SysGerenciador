@@ -13,11 +13,11 @@ public enum UserType {
 	private static final Map<Integer, UserType> BY_VALUE = new HashMap<>();
 
 	// for reference, this puts the title and value in a map so it's easy to return
-	// the Type by those values later
+	// the UserType by those values later
 	static {
-		for (UserType e : values()) {
-			BY_TITLE.put(e.title, e);
-			BY_VALUE.put(e.value, e);
+		for (UserType usertype : values()) {
+			BY_TITLE.put(usertype.title, usertype);
+			BY_VALUE.put(usertype.value, usertype);
 		}
 	}
 
