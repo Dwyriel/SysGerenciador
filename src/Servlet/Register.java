@@ -37,7 +37,7 @@ public class Register extends HttpServlet {
 			//u = cDal.insert(u);
 			
 			
-			//response.sendRedirect(request.getContextPath() + "/index.jsp");
+			response.sendRedirect(request.getContextPath() + "/Login.jsp");
 			
 		}
 
