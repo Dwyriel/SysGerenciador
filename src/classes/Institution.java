@@ -65,4 +65,9 @@ public class Institution {
 	public void setAdmins(List<User> admins) {
 		Admins = admins;
 	}
+
+	@Override
+	public String toString() {
+		return (((id != null) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : ""));
+	}
 }

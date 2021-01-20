@@ -95,4 +95,11 @@ public class User {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	@Override
+	public String toString() {
+		return (((id != null) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : "")
+				+ ((email != null) ? ("Email: " + email + "\n") : "") + type.title + "\nAtivo: "
+				+ ((active) ? "Sim" : "Não"));
+	}
 }

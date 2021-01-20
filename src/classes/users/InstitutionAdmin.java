@@ -55,4 +55,11 @@ public class InstitutionAdmin extends User {
 	public void setInstitution(Institution institution) {
 		this.institution = institution;
 	}
+
+	@Override
+	public String toString() {
+		String rString = super.toString();
+		rString += ((this.institution != null) ? ("\nInstituição: " + this.institution.getName()) + "\n" : "");
+		return rString;
+	}
 }
