@@ -9,7 +9,51 @@ public class User {
 	private boolean active;
 
 	public User() {
+		this.id = null;
+		this.name = null;
+		this.email = null;
+		this.type = UserType.None;
+		this.active = false;
+	}
 
+	public User(String name) {
+		this.id = null;
+		this.name = name;
+		this.email = null;
+		this.type = UserType.None;
+		this.active = false;
+	}
+
+	public User(String name, String email) {
+		this.id = null;
+		this.name = name;
+		this.email = email;
+		this.type = UserType.None;
+		this.active = false;
+	}
+
+	public User(String name, String email, UserType type) {
+		this.id = null;
+		this.name = name;
+		this.email = email;
+		this.type = type;
+		this.active = false;
+	}
+
+	public User(String name, String email, UserType type, boolean active) {
+		this.id = null;
+		this.name = name;
+		this.email = email;
+		this.type = type;
+		this.active = active;
+	}
+
+	public User(String name, String email, String id, UserType type, boolean active) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.type = type;
+		this.active = active;
 	}
 
 	public String getId() {

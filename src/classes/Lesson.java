@@ -1,20 +1,72 @@
 package classes;
 
 import java.util.List;
-
-import classes.users.User;
+import classes.users.*;
 
 public class Lesson {
 	private String id;
 	private String name;
-	private User teacher;
-	private List<User> students;
+	private Teacher teacher;
+	private List<Student> students;
 	private Institution institution;
+	private boolean active;
 
 	// TODO forum, assignments, class material
 
 	public Lesson() {
+		this.id = null;
+		this.name = null;
+		this.teacher = null;
+		this.students = null;
+		this.institution = null;
+	}
 
+	public Lesson(String nome) {
+		this.id = null;
+		this.name = nome;
+		this.teacher = null;
+		this.students = null;
+		this.institution = null;
+	}
+
+	public Lesson(String id, String name) {
+		this.id = id;
+		this.name = name;
+		this.teacher = null;
+		this.students = null;
+		this.institution = null;
+	}
+
+	public Lesson(String id, String name, Institution institution) {
+		this.id = id;
+		this.name = name;
+		this.teacher = null;
+		this.students = null;
+		this.institution = institution;
+	}
+
+	public Lesson(String id, String name, Teacher teacher) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = null;
+		this.institution = null;
+	}
+
+	public Lesson(String id, String name, Teacher teacher, List<Student> students) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = students;
+		this.institution = null;
+	}
+
+	public Lesson(String id, String name, Teacher teacher, List<Student> students, Institution institution) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = students;
+		this.institution = institution;
 	}
 
 	public String getId() {
@@ -37,15 +89,15 @@ public class Lesson {
 		return teacher;
 	}
 
-	public void setTeacher(User teacher) {
+	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
 
-	public List<User> getStudents() {
+	public List<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(List<User> students) {
+	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
 
@@ -56,4 +108,13 @@ public class Lesson {
 	public void setInstitution(Institution institution) {
 		this.institution = institution;
 	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 }
