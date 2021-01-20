@@ -117,4 +117,11 @@ public class Lesson {
 		this.active = active;
 	}
 
+	@Override
+	public String toString() {
+		return (((id != null) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : "")
+				+ ((teacher.getName() != null) ? ("Professor: " + teacher.getName() + "\n") : "")
+				+ ((this.institution != null) ? ("\nInstituição: " + this.institution.getName()) + "\n" : "")
+				+ "Ativo: " + ((active) ? "Sim" : "Não"));
+	}
 }
