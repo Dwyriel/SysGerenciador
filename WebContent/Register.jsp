@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="Register">
+	<form method="post" action="<%=request.getContextPath()%>/Register">
 		<div class="container">
 		  <div class="form-group">
 		    <label for="txtEmail">Email</label>
