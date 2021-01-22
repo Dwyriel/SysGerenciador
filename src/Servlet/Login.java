@@ -24,8 +24,8 @@ public class Login extends HttpServlet {
 
 		// como iremos vefiricas se o usuario existe no banco de dados, toda a logica
 		// abaixo é apenas uma demonstração simplificada do que devera acontecer.
-		if (user.getName().equals(RegisterDAL.users.get(0).getName())) {
-			if (password.equals(RegisterDAL.passwords.get(0))) {
+		if (user.getName().equals(TestDAL.user.getName())) {
+			if (password.equals(TestDAL.password)) {
 				System.out.println("Logged in");
 				response.sendRedirect(request.getContextPath() + "/Content.jsp");
 			}

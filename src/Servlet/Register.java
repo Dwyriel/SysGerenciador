@@ -24,9 +24,9 @@ public class Register extends HttpServlet {
 				request.getParameter("txtEmail"),
 				UserType.valueOfNumber(Integer.parseInt(request.getParameter("UserType"))));
 		String password = (request.getParameter("txtPassword"));
-		RegisterDAL.users.add(user);
-		RegisterDAL.passwords.add(password);
-		System.out.println(RegisterDAL.users.get(0));
+		TestDAL.user = user;
+		TestDAL.password = password;
+		System.out.println(TestDAL.user);
 		response.sendRedirect(request.getContextPath() + "/Login.jsp");
 	}
 }

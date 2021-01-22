@@ -1,13 +1,14 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.List;
 import classes.users.User;
 
 public class Institution {
 	private String id;
 	private String name;
-	private List<Lesson> classes;
-	private List<User> Admins;
+	private List<Lesson> classes = new ArrayList<Lesson>();
+	private List<User> Admins = new ArrayList<User>();
 	// TODO forum
 
 	public Institution() {
