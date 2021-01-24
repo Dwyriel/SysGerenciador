@@ -6,7 +6,7 @@ import classes.*;
 import classes.users.*;
 import java.sql.*;
 
-public class TestDAL extends Conexao{
+public class TestDAL {
 	public static User user = new User();
 	public static String password;
 	public static List<Institution> institutions = new ArrayList<Institution>();
@@ -20,17 +20,15 @@ public class TestDAL extends Conexao{
 			institutions.add(institution);
 		}
 	}
-	public User insert(User usuario) {
+	public static User insert(User usuario, String password) {
         try {
-            super.abrir();
-             
-            PreparedStatement stmt= getCnn().prepareStatement("INSERT INTO teste VALUES(null,?,?,?)");  
-            stmt.setString(1, usuario.getName());  
-            stmt.setString(2, usuario.getEmail());  
-            stmt.setString(3, password);
+            Connection connection = Conexao.getConnection();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO teste VALUES(null,?,?,?)");  
+            statement.setString(1, usuario.getName());  
+            statement.setString(2, usuario.getEmail());  
+            statement.setString(3, password);
          
-           
-            stmt.executeUpdate(); 
+            statement.executeUpdate();
           //  ResultSet id = stmt.getGeneratedKeys();
 //            if(id.next())
 //                usuario.setId(id.getInt(1));
@@ -41,7 +39,7 @@ public class TestDAL extends Conexao{
             return null;
         }
         finally {
-            super.fechar();
+            Conexao.closeConnection();
         }
 }
 }

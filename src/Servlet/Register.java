@@ -28,8 +28,7 @@ public class Register extends HttpServlet {
 		TestDAL.password = password;
 		System.out.println(TestDAL.user);
 
-		TestDAL dal = new TestDAL();
-		user = dal.insert(user);
+		user = TestDAL.insert(user, password);
 		
 		response.sendRedirect(request.getContextPath() + "/Login.jsp");
 	}
