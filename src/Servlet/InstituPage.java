@@ -20,10 +20,10 @@ public class InstituPage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		Institution institution = null;
 		for (Institution institu : TestDAL.institutions) {
-			if (institu.getId().equals(id)) {
+			if (institu.getId() == id) {
 				institution = institu;
 				break;
 			}

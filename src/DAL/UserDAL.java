@@ -31,7 +31,7 @@ public class UserDAL {
 	}
 
 	public static boolean updateUser(User user) {
-		return updateUser(user, "");
+		return updateUser(user, null);
 	}
 	
 	public static boolean updateUser(User user, String password) {
@@ -87,7 +87,7 @@ public class UserDAL {
 		}
 	}
 
-	public User get(int id) {
+	public static User get(int id) {
 		try {
 			Connection connection = Conexao.getConnection();
 
