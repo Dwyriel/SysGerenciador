@@ -5,7 +5,7 @@ import java.util.List;
 import classes.users.User;
 
 public class Institution {
-	private String id;
+	private int id;
 	private String name;
 	private List<Lesson> classes = new ArrayList<Lesson>();
 	private List<User> Admins = new ArrayList<User>();
@@ -13,33 +13,33 @@ public class Institution {
 
 	public Institution() {
 		this.name = null;
-		this.id = null;
+		this.id = -1;
 		this.classes = null;
 	}
 
 	public Institution(String name) {
 		this.name = name;
-		this.id = null;
+		this.id = -1;
 		this.classes = null;
 	}
 
-	public Institution(String id, String name) {
+	public Institution(int id, String name) {
 		this.name = name;
 		this.id = id;
 		this.classes = null;
 	}
 
-	public Institution(String id, String name, List<Lesson> lessons) {
+	public Institution(int id, String name, List<Lesson> lessons) {
 		this.name = name;
 		this.id = id;
 		this.classes = lessons;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -69,6 +69,6 @@ public class Institution {
 
 	@Override
 	public String toString() {
-		return (((id != null) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : ""));
+		return (((id != -1) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : ""));
 	}
 }

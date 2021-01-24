@@ -3,7 +3,7 @@ package DAL;
 import java.sql.*;
 
 public class Conexao {
-	public Conexao() {
+	/*public Conexao() {
 		this.servidor = "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com";
 		this.porta = "3306";
 		this.bancoDados = "b0ct7gpszqljrkihasaa";
@@ -18,12 +18,14 @@ public class Conexao {
 		this.usuario = usuario;
 		this.senha = senha;
 	}
+	We can either remove this or go back to how it was
+	*/
 
-	private static String servidor = "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com";
-	private static String porta = "3306";
-	private static String bancoDados = "b0ct7gpszqljrkihasaa";
-	private static String usuario = "ufjxrkklmrtvulik";
-	private static String senha = "e89vbO8hjokn9h1EFndV";
+	private static final String servidor = "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com";
+	private static final String porta = "3306";
+	private static final String bancoDados = "b0ct7gpszqljrkihasaa";
+	private static final String usuario = "ufjxrkklmrtvulik";
+	private static final String senha = "e89vbO8hjokn9h1EFndV";
 
 	public static Connection getConnection() {
 		Connection connection = null;

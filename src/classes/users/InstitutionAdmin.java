@@ -37,12 +37,12 @@ public class InstitutionAdmin extends User {
 		this.institution = institutions;
 	}
 
-	public InstitutionAdmin(String name, String email, String id, UserType type, boolean active) {
+	public InstitutionAdmin(String name, String email, int id, UserType type, boolean active) {
 		super(name, email, id, type, active);
 		this.institution = null;
 	}
 
-	public InstitutionAdmin(String name, String email, String id, UserType type, boolean active,
+	public InstitutionAdmin(String name, String email, int id, UserType type, boolean active,
 			Institution institutions, List<Lesson> lessons) {
 		super(name, email, id, type, active);
 		this.institution = institutions;

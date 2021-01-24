@@ -48,13 +48,13 @@ public class Teacher extends User {
 		this.lessons = lessons;
 	}
 
-	public Teacher(String name, String email, String id, UserType type, boolean active) {
+	public Teacher(String name, String email, int id, UserType type, boolean active) {
 		super(name, email, id, type, active);
 		this.institutions = null;
 		this.lessons = null;
 	}
 
-	public Teacher(String name, String email, String id, UserType type, boolean active, List<Institution> institutions,
+	public Teacher(String name, String email, int id, UserType type, boolean active, List<Institution> institutions,
 			List<Lesson> lessons) {
 		super(name, email, id, type, active);
 		this.institutions = institutions;

@@ -4,7 +4,7 @@ import java.util.List;
 import classes.users.*;
 
 public class Lesson {
-	private String id;
+	private int id;
 	private String name;
 	private Teacher teacher;
 	private List<Student> students;
@@ -14,7 +14,7 @@ public class Lesson {
 	// TODO forum, assignments, class material
 
 	public Lesson() {
-		this.id = null;
+		this.id = -1;
 		this.name = null;
 		this.teacher = null;
 		this.students = null;
@@ -22,14 +22,14 @@ public class Lesson {
 	}
 
 	public Lesson(String nome) {
-		this.id = null;
+		this.id = -1;
 		this.name = nome;
 		this.teacher = null;
 		this.students = null;
 		this.institution = null;
 	}
 
-	public Lesson(String id, String name) {
+	public Lesson(int id, String name) {
 		this.id = id;
 		this.name = name;
 		this.teacher = null;
@@ -37,7 +37,7 @@ public class Lesson {
 		this.institution = null;
 	}
 
-	public Lesson(String id, String name, Institution institution) {
+	public Lesson(int id, String name, Institution institution) {
 		this.id = id;
 		this.name = name;
 		this.teacher = null;
@@ -45,7 +45,7 @@ public class Lesson {
 		this.institution = institution;
 	}
 
-	public Lesson(String id, String name, Teacher teacher) {
+	public Lesson(int id, String name, Teacher teacher) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
@@ -53,7 +53,7 @@ public class Lesson {
 		this.institution = null;
 	}
 
-	public Lesson(String id, String name, Teacher teacher, List<Student> students) {
+	public Lesson(int id, String name, Teacher teacher, List<Student> students) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
@@ -61,7 +61,7 @@ public class Lesson {
 		this.institution = null;
 	}
 
-	public Lesson(String id, String name, Teacher teacher, List<Student> students, Institution institution) {
+	public Lesson(int id, String name, Teacher teacher, List<Student> students, Institution institution) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
@@ -69,11 +69,11 @@ public class Lesson {
 		this.institution = institution;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -119,7 +119,7 @@ public class Lesson {
 
 	@Override
 	public String toString() {
-		return (((id != null) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : "")
+		return (((id != -1) ? ("Id: " + id + "\n") : "") + ((name != null) ? ("Name: " + name + "\n") : "")
 				+ ((teacher.getName() != null) ? ("Professor: " + teacher.getName() + "\n") : "")
 				+ ((this.institution != null) ? ("\nInstituição: " + this.institution.getName()) + "\n" : "")
 				+ "Ativo: " + ((active) ? "Sim" : "Não"));
