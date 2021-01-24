@@ -13,8 +13,8 @@ public class Student extends User {
 		this.lessons = null;
 	}
 
-	public Student(String name) {
-		super(name);
+	public Student(String email) {
+		super(email);
 	}
 
 	public Student(String name, String email) {
@@ -57,6 +57,12 @@ public class Student extends User {
 	public Student(String name, String email, int id, UserType type, boolean active, Institution institutions,
 			List<Lesson> lessons) {
 		super(name, email, id, type, active);
+		this.institution = institutions;
+		this.lessons = lessons;
+	}
+
+	public Student(User user, Institution institutions, List<Lesson> lessons) {
+		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
 		this.institution = institutions;
 		this.lessons = lessons;
 	}
