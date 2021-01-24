@@ -16,10 +16,10 @@ public class User {
 		this.active = false;
 	}
 
-	public User(String name) {
+	public User(String email) {
 		this.id = -1;
-		this.name = name;
-		this.email = null;
+		this.name = null;
+		this.email = email;
 		this.type = UserType.None;
 		this.active = false;
 	}
