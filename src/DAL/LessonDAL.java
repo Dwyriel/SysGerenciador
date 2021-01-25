@@ -9,7 +9,7 @@ public class LessonDAL {
 	public static Lesson insertLesson(Lesson lesson) {
 		try {
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO lessons VALUES(null,?,?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO lessons VALUES(null,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, lesson.getName());
 			statement.setInt(2, lesson.getInstitution().getId());
 			statement.setInt(3, lesson.getTeacher().getId());

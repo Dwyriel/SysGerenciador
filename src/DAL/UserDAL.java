@@ -14,7 +14,7 @@ public class UserDAL {
 		try {
 			user.setActive(true);
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,?,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getEmail());
 			statement.setString(3, password);
@@ -68,6 +68,28 @@ public class UserDAL {
 			Conexao.closeConnection();
 		}
 	}
+	
+	public static boolean deleteUserRelations(int id) {
+		try {
+			Connection connection = Conexao.getConnection();
+			Statement statement = connection.createStatement();
+			String query1 = "DELETE FROM adm WHERE user_id = " + id;
+			String query2 = "DELETE FROM teacher_lessons WHERE teacher_id = " + id;
+			String query3 = "DELETE FROM lesson_students WHERE student_id = " + id;
+			String query4 = "UPDATE lessons SET teacher_id = -1 WHERE teacher_id = " + id;
+			statement.addBatch(query1);
+			statement.addBatch(query2);
+			statement.addBatch(query3);
+			statement.addBatch(query4);
+			statement.executeBatch();
+			return true;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return false;
+		} finally {
+			Conexao.closeConnection();
+		}
+	}
 
 	public static boolean deleteUser(int id) {
 		try {
@@ -76,8 +98,8 @@ public class UserDAL {
 			String query1 = "DELETE FROM adm WHERE user_id = " + id;
 			String query2 = "DELETE FROM teacher_lessons WHERE teacher_id = " + id;
 			String query3 = "DELETE FROM lesson_students WHERE student_id = " + id;
-			String query4 = "DELETE FROM users WHERE id = " + id;
-			String query5 = "UPDATE lessons SET teacher_id = -1 WHERE teacher_id = " + id;
+			String query4 = "UPDATE lessons SET teacher_id = -1 WHERE teacher_id = " + id;
+			String query5 = "DELETE FROM users WHERE id = " + id;
 			statement.addBatch(query1);
 			statement.addBatch(query2);
 			statement.addBatch(query3);
@@ -100,6 +122,27 @@ public class UserDAL {
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
 			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			User user = null;
+			if (resultSet.next()) {
+				user = new User(resultSet.getString("name"), resultSet.getString("email"), resultSet.getInt("id"),
+						UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+			}
+			return user;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		} finally {
+			Conexao.closeConnection();
+		}
+	}
+	
+	public static User getUser(String email) {
+
+		try {
+			Connection connection = Conexao.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+			statement.setString(1, email);
 			ResultSet resultSet = statement.executeQuery();
 			User user = null;
 			if (resultSet.next()) {

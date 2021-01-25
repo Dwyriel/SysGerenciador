@@ -10,7 +10,7 @@ public class AdminDAL {
 	public static InstitutionAdmin insertAdmin(InstitutionAdmin admin) {
 		try {
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO adm VALUES(null,?,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO adm VALUES(null,?,?)", Statement.RETURN_GENERATED_KEYS);
 			statement.setInt(1, admin.getId());
 			statement.setInt(2, admin.getInstitution().getId());
 			statement.executeUpdate();

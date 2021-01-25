@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="javax.servlet.http.*, classes.*, classes.users.* , DAL.*, java.util.ArrayList, java.util.List"%>
+	pageEncoding="ISO-8859-1"
+	import="javax.servlet.http.*, classes.*, classes.users.* , DAL.*, java.util.ArrayList, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,22 +100,28 @@
 			</ul>
 		</div>
 		<div class="text-center" style="margin-left: 500px">
-		<%
-		for (Institution institution : TestDAL.institutions) {
-		%>
-		<div class="card" style="width: 18rem;">
-			<div class="card-body">
-				<h5 class="card-title"><%= institution.getName() %></h5>
-				<p class="card-text">Some quick example text to build on the
-					card title and make up the bulk of the card's content.</p>
-				<a href="<%=request.getContextPath() %>/InstituPage?id=<%=institution.getId() %>" class="btn btn-primary">Go there</a>
+			<%
+			List<Institution> institutionList = InstitutionDAL.getAllInstitutions();
+			if (!institutionList.isEmpty())
+				for (Institution institution : institutionList) {
+			%>
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title"><%=institution.getName()%></h5>
+					<p class="card-text">
+						Institution id:
+						<%=institution.getId()%></p>
+					<a
+						href="<%=request.getContextPath()%>/InstituPage?id=<%=institution.getId()%>"
+						class="btn btn-primary">Go there</a>
+				</div>
 			</div>
-		</div>
-		<%
-		}
-		%>
+			<%
+			} else { %>
+			<span>No institutions yet</span>
+			<% } %>
 		</div>
 	</div>
-	
+
 </body>
 </html>
