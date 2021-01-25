@@ -34,6 +34,10 @@
 		  </div> 
 		  <button type="submit" class="btn btn-primary">Enviar</button>
 		</div>
+		<div>
+		<a href="DelTest.jsp">deletar UserTest</a>
+		</div>
+		
 </form>
 </body>
 

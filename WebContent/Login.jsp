@@ -99,15 +99,15 @@ body {
 	            <div class="login-form">
 	               <form method="post" action="<%=request.getContextPath()%>/Login">
 	                  <div class="form-group">
-	                     <label>User Name</label>
-	                     <input type="text" name="UserName" class="form-control" placeholder="User Name">
+	                     <label>E-Mail</label>
+	                     <input type="text" name="UserEmail" class="form-control" placeholder="E-Mail" required>
 	                  </div>
 	                  <div class="form-group">
 	                     <label>Password</label>
-	                     <input type="password" name="UserPassword" class="form-control" placeholder="Password">
+	                     <input type="password" name="UserPassword" class="form-control" placeholder="Password" required>
 	                  </div>
 	                  <button type="submit" class="btn btn-black">Login</button>
-	                  <button type="submit" class="btn btn-secondary">Register</button>
+	                  <a type="submit" class="btn btn-secondary" href="Register.jsp">Register</a>
 	               </form>
 	            </div>
 	         </div>

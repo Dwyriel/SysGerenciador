@@ -7,8 +7,12 @@ import classes.*;
 
 public class UserDAL {
 
+	public static User user = new User();
+	public static String password;
+
 	public static User insertUser(User user, String password) {
 		try {
+			user.setActive(true);
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,?,?,?)");
 			statement.setString(1, user.getName());
@@ -32,7 +36,7 @@ public class UserDAL {
 	public static boolean updateUser(User user) {
 		return updateUser(user, null);
 	}
-	
+
 	public static boolean updateUser(User user, String password) {
 		try {
 			Connection connection = Conexao.getConnection();
@@ -69,11 +73,11 @@ public class UserDAL {
 		try {
 			Connection connection = Conexao.getConnection();
 			Statement statement = connection.createStatement();
-			String query1 = "DELETE FROM adm WHERE user_id = "+id;
-			String query2 = "DELETE FROM teacher_lessons WHERE teacher_id = "+id;
-			String query3 = "DELETE FROM lesson_students WHERE student_id = "+id;
-			String query4 = "DELETE FROM users WHERE id = "+id;
-			String query5 = "UPDATE lessons SET teacher_id = -1 WHERE teacher_id = "+ id;
+			String query1 = "DELETE FROM adm WHERE user_id = " + id;
+			String query2 = "DELETE FROM teacher_lessons WHERE teacher_id = " + id;
+			String query3 = "DELETE FROM lesson_students WHERE student_id = " + id;
+			String query4 = "DELETE FROM users WHERE id = " + id;
+			String query5 = "UPDATE lessons SET teacher_id = -1 WHERE teacher_id = " + id;
 			statement.addBatch(query1);
 			statement.addBatch(query2);
 			statement.addBatch(query3);
@@ -91,6 +95,7 @@ public class UserDAL {
 	}
 
 	public static User getUser(int id) {
+
 		try {
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
@@ -98,7 +103,8 @@ public class UserDAL {
 			ResultSet resultSet = statement.executeQuery();
 			User user = null;
 			if (resultSet.next()) {
-				user = new User(resultSet.getString("name"), resultSet.getString("email"),resultSet.getInt("id"), UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+				user = new User(resultSet.getString("name"), resultSet.getString("email"), resultSet.getInt("id"),
+						UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
 			}
 			return user;
 		} catch (Exception ex) {
