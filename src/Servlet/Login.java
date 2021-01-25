@@ -27,7 +27,7 @@ public class Login extends HttpServlet {
 		
 		String password = (request.getParameter("UserPassword"));
 		
-		user = UserDAL.getUser(user, password);
+		user = UserDAL.userAutentication(user, password);
 
 		// como iremos vefiricas se o usuario existe no banco de dados, toda a logica
 		// abaixo é apenas uma demonstração simplificada do que devera acontecer.
