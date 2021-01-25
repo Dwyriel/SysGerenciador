@@ -13,8 +13,8 @@ public class InstitutionAdmin extends User {
 		this.institution = null;
 	}
 
-	public InstitutionAdmin(String name) {
-		super(name);
+	public InstitutionAdmin(String email) {
+		super(email);
 	}
 
 	public InstitutionAdmin(String name, String email) {
@@ -43,8 +43,13 @@ public class InstitutionAdmin extends User {
 	}
 
 	public InstitutionAdmin(String name, String email, int id, UserType type, boolean active,
-			Institution institutions, List<Lesson> lessons) {
+			Institution institutions) {
 		super(name, email, id, type, active);
+		this.institution = institutions;
+	}
+
+	public InstitutionAdmin(User user, Institution institutions) {
+		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
 		this.institution = institutions;
 	}
 

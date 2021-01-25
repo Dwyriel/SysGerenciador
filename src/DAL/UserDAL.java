@@ -24,7 +24,6 @@ public class UserDAL {
 			ResultSet id = statement.getGeneratedKeys();
 			if (id.next())
 				user.setId(id.getInt(1));
-
 			return user;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -74,12 +73,12 @@ public class UserDAL {
 			String query2 = "DELETE FROM teacher_lessons WHERE teacher_id = "+id;
 			String query3 = "DELETE FROM lesson_students WHERE student_id = "+id;
 			String query4 = "DELETE FROM users WHERE id = "+id;
-			//TODO update lessons so it removes teacher_id / sets it -1 
+			String query5 = "UPDATE lessons SET teacher_id = -1 WHERE teacher_id = "+ id;
 			statement.addBatch(query1);
 			statement.addBatch(query2);
 			statement.addBatch(query3);
 			statement.addBatch(query4);
-
+			statement.addBatch(query5);
 			statement.executeBatch();
 
 			return true;
@@ -91,7 +90,9 @@ public class UserDAL {
 		}
 	}
 
+
 	public static User getUser(User user, String password) {
+
 		try {
 			Connection connection = Conexao.getConnection();
 
