@@ -27,10 +27,6 @@ public class Conexao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://" + servidor + ":" + porta + "/" + bancoDados + "",
 					usuario, senha);
-			if (connection != null)
-				System.out.println("Connection not null");
-			else
-				System.out.println("Connection null");
 			return connection;
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver is missing.");

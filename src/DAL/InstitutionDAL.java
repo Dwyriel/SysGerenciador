@@ -10,7 +10,7 @@ public class InstitutionDAL {
 	public static Institution insertInstitution(Institution institution) {
 		try {
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO institutions VALUES(null,?)");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO institutions VALUES(null,?)", Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, institution.getName());
 			statement.executeUpdate();
 			ResultSet id = statement.getGeneratedKeys();
