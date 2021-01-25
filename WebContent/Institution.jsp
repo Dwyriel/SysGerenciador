@@ -98,6 +98,7 @@
 				<li><a href="#item3">##</a></li>
 			</ul>
 		</div>
+		<div class="text-center" style="margin-left: 500px">
 		<%
 		for (Institution institution : TestDAL.institutions) {
 		%>
@@ -112,6 +113,8 @@
 		<%
 		}
 		%>
+		</div>
 	</div>
+	
 </body>
 </html>

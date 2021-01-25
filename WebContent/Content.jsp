@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="javax.servlet.http.*,classes.users.*, java.lang.*"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,11 @@ body {
   padding-top: 56px;
 }
 </style>
-
+<%
+      		HttpSession s = request.getSession(false);  
+      		User user = (User)s.getAttribute("user");
+      		
+      %>
 </head>
 
 <body>
@@ -40,11 +45,19 @@ body {
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+          <% if(user.getType() == UserType.ServerAdmin) { %>
+            <a class="nav-link" href="Institution.jsp">Admin Painel</a>
+            <% }  else if (user.getType() == UserType.InstitutionAdmin){ %>
+            <a class="dropdown-item" href="InstitutionPage.jsp">Administrador da instituição</a>
+      		<% }  else if (user.getType() == UserType.Teacher){ %>
+            <a class="dropdown-item" href="InstitutionPage.jsp">Professor</a>
+      		<% } %>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="<%=request.getContextPath()%>/Logout">Logout</a>
           </li>
+           
+         
         </ul>
       </div>
     </div>
@@ -57,7 +70,7 @@ body {
     <header class="jumbotron my-4">
       <h1 class="display-3">A Warm Welcome!</h1>
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+      <a href="#" class="btn btn-primary btn-lg"><%= user.getName() %></a>
     </header>
 
     <!-- Page Features -->

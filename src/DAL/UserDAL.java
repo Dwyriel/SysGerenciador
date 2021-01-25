@@ -6,9 +6,13 @@ import classes.users.*;
 import classes.*;
 
 public class UserDAL {
-
+	
+	public static User user = new User();
+	public static String password;
+	
 	public static User insertUser(User user, String password) {
 		try {
+			user.setActive(true);
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,?,?,?)");
 			statement.setString(1, user.getName());
@@ -87,17 +91,19 @@ public class UserDAL {
 		}
 	}
 
-	public static User get(int id) {
+	public static User getUser(User user, String password) {
 		try {
 			Connection connection = Conexao.getConnection();
 
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
-			statement.setInt(1, id);
-
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
+			statement.setString(1, user.getEmail());
+			statement.setString(2, password);
+			
 			ResultSet resultSet = statement.executeQuery();
-			User user = null;
+
 			if (resultSet.next()) {
-				user = new User(resultSet.getString("name"), resultSet.getString("email"),resultSet.getInt("id"), UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+			user = new User(resultSet.getString("name"), resultSet.getString("email"),resultSet.getInt("id"), UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+			 	
 			}
 			return user;
 		} catch (Exception ex) {
