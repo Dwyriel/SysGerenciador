@@ -5,7 +5,7 @@ import java.sql.*;
 import classes.users.*;
 import classes.*;
 
-//the Institution administrator, not to be mistaken by the server admin.
+//the Institution administrator, not to be mistaken with the server admin.
 public class AdminDAL {
 	public static InstitutionAdmin insertAdmin(InstitutionAdmin admin) {
 		try {
@@ -25,11 +25,12 @@ public class AdminDAL {
 			Conexao.closeConnection();
 		}
 	}
-	
-	public static boolean updateAdmin(InstitutionAdmin admin) {//this should probably never be used
+
+	public static boolean updateAdmin(InstitutionAdmin admin) {// this should probably never be used
 		try {
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("UPDATE adm SET institution_id = ? WHERE user_id = ?");
+			PreparedStatement statement = connection
+					.prepareStatement("UPDATE adm SET institution_id = ? WHERE user_id = ?");
 			statement.setInt(1, admin.getInstitution().getId());
 			statement.setInt(2, admin.getId());
 			statement.executeUpdate();
@@ -41,7 +42,7 @@ public class AdminDAL {
 			Conexao.closeConnection();
 		}
 	}
-	
+
 	public static boolean deleteAdmin(int id) {
 		try {
 			Connection connection = Conexao.getConnection();
@@ -62,13 +63,14 @@ public class AdminDAL {
 	public static InstitutionAdmin getAdmin(int id) {
 		try {
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM adm WHERE id = ?");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM adm WHERE user_id = ?");
 			statement.setInt(1, id);
 
 			ResultSet resultSet = statement.executeQuery();
 			InstitutionAdmin admin = null;
 			if (resultSet.next()) {
-				admin = new InstitutionAdmin(resultSet.getString("name"), resultSet.getString("email"),resultSet.getInt("id"), UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+				admin = new InstitutionAdmin(UserDAL.getUser(id),
+						InstitutionDAL.getInstitution(resultSet.getInt("institution_id")));
 			}
 			return admin;
 		} catch (Exception ex) {
@@ -79,22 +81,39 @@ public class AdminDAL {
 		}
 	}
 
-	public static List<User> getAllUsers() {
+	public static InstitutionAdmin getAdminByInstitution(int institution_id) {
 		try {
-			List<User> userList = new ArrayList<User>();
 			Connection connection = Conexao.getConnection();
-
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM adm WHERE institution_id = ?");
+			statement.setInt(1, institution_id);
 
 			ResultSet resultSet = statement.executeQuery();
-
-			while (resultSet.next()) {
-				User user = new User(resultSet.getString("name"), resultSet.getString("email"), resultSet.getInt("id"),
-						UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
-				userList.add(user);
+			InstitutionAdmin admin = null;
+			if (resultSet.next()) {
+				admin = new InstitutionAdmin(UserDAL.getUser(resultSet.getInt("user_id")),
+						InstitutionDAL.getInstitution(institution_id));
 			}
+			return admin;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		} finally {
+			Conexao.closeConnection();
+		}
+	}
 
-			return userList;
+	public static List<InstitutionAdmin> getAllAdmins() {
+		try {
+			List<InstitutionAdmin> adminList = new ArrayList<InstitutionAdmin>();
+			Connection connection = Conexao.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM adm");
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				InstitutionAdmin admin = new InstitutionAdmin(UserDAL.getUser(resultSet.getInt("user_id")),
+						InstitutionDAL.getInstitution(resultSet.getInt("institution_id")));
+				adminList.add(admin);
+			}
+			return adminList;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return null;

@@ -3,23 +3,17 @@ package DAL;
 import java.sql.*;
 
 public class Conexao {
-	/*public Conexao() {
-		this.servidor = "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com";
-		this.porta = "3306";
-		this.bancoDados = "b0ct7gpszqljrkihasaa";
-		this.usuario = "ufjxrkklmrtvulik";
-		this.senha = "e89vbO8hjokn9h1EFndV";
-	}
-
-	public Conexao(String servidor, String porta, String bancoDados, String usuario, String senha) {
-		this.servidor = servidor;
-		this.porta = porta;
-		this.bancoDados = bancoDados;
-		this.usuario = usuario;
-		this.senha = senha;
-	}
-	We can either remove this or go back to how it was
-	*/
+	/*
+	 * public Conexao() { this.servidor =
+	 * "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com"; this.porta = "3306";
+	 * this.bancoDados = "b0ct7gpszqljrkihasaa"; this.usuario = "ufjxrkklmrtvulik";
+	 * this.senha = "e89vbO8hjokn9h1EFndV"; }
+	 * 
+	 * public Conexao(String servidor, String porta, String bancoDados, String
+	 * usuario, String senha) { this.servidor = servidor; this.porta = porta;
+	 * this.bancoDados = bancoDados; this.usuario = usuario; this.senha = senha; }
+	 * We can either remove this or go back to how it was
+	 */
 
 	private static final String servidor = "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com";
 	private static final String porta = "3306";
@@ -31,11 +25,11 @@ public class Conexao {
 		Connection connection = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			connection = DriverManager.getConnection(  
-		            "jdbc:mysql://" + servidor + ":" + porta + "/" + bancoDados + "",usuario,senha);
-			if(connection != null)
+			connection = DriverManager.getConnection("jdbc:mysql://" + servidor + ":" + porta + "/" + bancoDados + "",
+					usuario, senha);
+			if (connection != null)
 				System.out.println("Connection not null");
-			else 
+			else
 				System.out.println("Connection null");
 			return connection;
 		} catch (ClassNotFoundException e) {
@@ -46,7 +40,7 @@ public class Conexao {
 			return null;
 		}
 	}
-	
+
 	public static boolean closeConnection() {
 		try {
 			getConnection().close();

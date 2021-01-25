@@ -54,6 +54,12 @@ public class Student extends User {
 		this.lessons = null;
 	}
 
+	public Student(User user) {
+		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
+		this.institution = null;
+		this.lessons = null;
+	}
+
 	public Student(String name, String email, int id, UserType type, boolean active, Institution institutions,
 			List<Lesson> lessons) {
 		super(name, email, id, type, active);

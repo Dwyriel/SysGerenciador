@@ -40,14 +40,18 @@ public class UserDAL {
 			PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? ,"
 					+ ((password != null && password != "") ? "password = ?," : "")
 					+ "usertype = ?, active = ? WHERE id = ?");
-			statement.setString(i, user.getName()); i++;
-			statement.setString(i, user.getEmail()); i++;
+			statement.setString(i, user.getName());
+			i++;
+			statement.setString(i, user.getEmail());
+			i++;
 			if (password != null && password != "") {
 				statement.setString(i, password);
 				i++;
 			}
-			statement.setInt(i, user.getType().value); i++;
-			statement.setBoolean(i, user.isActive()); i++;
+			statement.setInt(i, user.getType().value);
+			i++;
+			statement.setBoolean(i, user.isActive());
+			i++;
 			statement.setInt(i, user.getId());
 
 			statement.executeUpdate();
@@ -89,10 +93,8 @@ public class UserDAL {
 	public static User getUser(int id) {
 		try {
 			Connection connection = Conexao.getConnection();
-
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
 			statement.setInt(1, id);
-
 			ResultSet resultSet = statement.executeQuery();
 			User user = null;
 			if (resultSet.next()) {

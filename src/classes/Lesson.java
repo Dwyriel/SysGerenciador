@@ -6,10 +6,10 @@ import classes.users.*;
 public class Lesson {
 	private int id;
 	private String name;
-	private Teacher teacher;
-	private List<Student> students;
+	private User teacher;
+	private List<User> students;
 	private Institution institution;
-	private boolean active;
+	private boolean active = true;
 
 	// TODO forum, assignments, class material
 
@@ -45,7 +45,7 @@ public class Lesson {
 		this.institution = institution;
 	}
 
-	public Lesson(int id, String name, Teacher teacher) {
+	public Lesson(int id, String name, User teacher) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
@@ -53,7 +53,24 @@ public class Lesson {
 		this.institution = null;
 	}
 
-	public Lesson(int id, String name, Teacher teacher, List<Student> students) {
+	public Lesson(int id, String name, User teacher, Institution institution) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = null;
+		this.institution = institution;
+	}
+
+	public Lesson(int id, String name, User teacher, Institution institution, boolean active) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = null;
+		this.institution = institution;
+		this.active = active;
+	}
+
+	public Lesson(int id, String name, User teacher, List<User> students) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
@@ -61,12 +78,21 @@ public class Lesson {
 		this.institution = null;
 	}
 
-	public Lesson(int id, String name, Teacher teacher, List<Student> students, Institution institution) {
+	public Lesson(int id, String name, User teacher, List<User> students, Institution institution) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
 		this.students = students;
 		this.institution = institution;
+	}
+
+	public Lesson(int id, String name, User teacher, List<User> students, Institution institution, boolean active) {
+		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = students;
+		this.institution = institution;
+		this.active = active;
 	}
 
 	public int getId() {
@@ -89,15 +115,15 @@ public class Lesson {
 		return teacher;
 	}
 
-	public void setTeacher(Teacher teacher) {
+	public void setTeacher(User teacher) {
 		this.teacher = teacher;
 	}
 
-	public List<Student> getStudents() {
+	public List<User> getStudents() {
 		return students;
 	}
 
-	public void setStudents(List<Student> students) {
+	public void setStudents(List<User> students) {
 		this.students = students;
 	}
 

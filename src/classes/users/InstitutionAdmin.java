@@ -42,6 +42,11 @@ public class InstitutionAdmin extends User {
 		this.institution = null;
 	}
 
+	public InstitutionAdmin(User user) {
+		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
+		this.institution = null;
+	}
+
 	public InstitutionAdmin(String name, String email, int id, UserType type, boolean active,
 			Institution institutions) {
 		super(name, email, id, type, active);
