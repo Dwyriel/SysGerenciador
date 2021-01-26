@@ -19,8 +19,6 @@ body {
     font-family: "Lato", sans-serif;
 }
 
-
-
 .main-head{
     height: 150px;
     background: #FFF;
@@ -95,8 +93,8 @@ body {
 	
 	<div class="sidenav">
 	         <div class="login-main-text">
-	            <h2>Application<br> Login Page</h2>
-	            <p>Login or register from here to access.</p>
+	            <h2>página de Login</h2>
+	            <p>Faça Login ou se Registre para ter acesso .</p>
 	         </div>
 	      </div>
 	      <div class="main">

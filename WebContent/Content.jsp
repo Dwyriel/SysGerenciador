@@ -24,8 +24,7 @@ body {
 			request.setAttribute("Alert", alert);
 			request.getRequestDispatcher("/Login.jsp").include(request, response);
 			return;
-			
-				  }
+			}	
 				HttpSession sessionLog = request.getSession(false);
 				User user = (User)sessionLog.getAttribute("user");
 					  	
