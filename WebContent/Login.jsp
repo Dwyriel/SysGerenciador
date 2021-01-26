@@ -1,94 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ page import="javax.servlet.http.*,classes.*,classes.users.*" %>
+     <%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
+request.setAttribute("Msg", null);}; %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style/Login.css" media="screen" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<title>Insert title here</title>
-<%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
-request.setAttribute("Msg", null);};
-
-	    String alert = null; if(request.getAttribute("Alert") != null ){ alert = (String)request.getAttribute("Alert");}  
- if (alert != null ) { %> 	<script> alert("<%= alert %>"); </script> 	<% } %>
+<title>Blackbox</title>
 </head>
-<style>
-body {
-    font-family: "Lato", sans-serif;
-}
-
-.main-head{
-    height: 150px;
-    background: #FFF;
-   
-}
-
-.sidenav {
-    height: 100%;
-    background-color: #000;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
-
-.main {
-    padding: 0px 10px;
-}
-
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-}
-
-@media screen and (max-width: 450px) {
-    .login-form{
-        margin-top: 10%;
-    }
-
-    .register-form{
-        margin-top: 10%;
-    }
-}
-
-@media screen and (min-width: 768px){
-    .main{
-        margin-left: 40%; 
-    }
-
-    .sidenav{
-        width: 40%;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-    }
-
-    .login-form{
-        margin-top: 80%;
-    }
-
-    .register-form{
-        margin-top: 20%;
-    }
-}
-
-
-.login-main-text{
-    margin-top: 20%;
-    padding: 60px;
-    color: #fff;
-}
-
-.login-main-text h2{
-    font-weight: 300;
-}
-
-.btn-black{
-    background-color: #000 !important;
-    color: #fff;
-}
-</style>
 <body>
 	
 	<div class="sidenav">
@@ -113,10 +37,40 @@ body {
 	                     <% msg=null; }   %>
 	                  </div>
 	                  <button type="submit" class="btn btn-black">Login</button>
-	                  <a type="submit" class="btn btn-secondary" href="Register.jsp">Register</a>
+	                  <a type="submit" class="btn btn-secondary" href="Register.jsp">Registrar</a>
 	               </form>
 	            </div>
 	         </div>
 	         </div>
 </body>
+<%
+	    String alert = null; if(request.getAttribute("Alert") != null ){ alert = (String)request.getAttribute("Alert");}  
+ if (alert != null ) { %> 	<script> alert("<%= alert %>"); </script> 	<% } %>
+ <% 	
+ 	if(session.getAttribute("user") != null) {
+ 		
+ 		User user = (User)session.getAttribute("user");
+ 		
+ 		if(user.getType() == UserType.ServerAdmin) {
+			 
+			 response.sendRedirect(request.getContextPath() + "/AdminPainel.jsp");
+			 
+        }  else if (user.getType() == UserType.InstitutionAdmin){
+    
+       	 response.sendRedirect(request.getContextPath() + "/InstitutionPage.jsp");
+ 
+  		 }  else if (user.getType() == UserType.Teacher){
+  			 
+  			response.sendRedirect(request.getContextPath() + "/Institution.jsp");
+        
+  		 } else if (user.getType() == UserType.Student){   
+  			 
+  			response.sendRedirect(request.getContextPath() + "/Content.jsp");
+  			
+  		 } else {
+  			 
+  			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");
+  		 }
+	}
+ %>
 </html>

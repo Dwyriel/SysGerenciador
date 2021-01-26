@@ -41,12 +41,29 @@ public class Login extends HttpServlet {
 			String msg ="Senha Inválida";
 			request.setAttribute("Msg", msg);
 			request.getRequestDispatcher("/Login.jsp").include(request, response);
-			
 			return;
 		} 
 		HttpSession session=request.getSession();
         session.setAttribute("user",user);
 		System.out.println(user);
-		response.sendRedirect(request.getContextPath() + "/Content.jsp");
+		
+		if(user.getType() == UserType.ServerAdmin) {
+			 
+			 response.sendRedirect(request.getContextPath() + "/AdminPainel.jsp");
+			 
+         }  else if (user.getType() == UserType.InstitutionAdmin){
+     
+        	 response.sendRedirect(request.getContextPath() + "/InstitutionPage.jsp");
+  
+   		 }  else if (user.getType() == UserType.Teacher){
+   			 
+   			response.sendRedirect(request.getContextPath() + "/Institution.jsp");
+         
+   		 } else if (user.getType() == UserType.Student){   
+   			 
+   			response.sendRedirect(request.getContextPath() + "/Content.jsp");
+   		 } else {
+   			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");
+   		 }
 	}
 }
