@@ -44,6 +44,14 @@ public class Lesson {
 		this.students = null;
 		this.institution = institution;
 	}
+	
+	public Lesson(String name, Institution institution) {
+		this.id = -1;
+		this.name = name;
+		this.teacher = null;
+		this.students = null;
+		this.institution = institution;
+	}
 
 	public Lesson(int id, String name, User teacher) {
 		this.id = id;
@@ -60,9 +68,26 @@ public class Lesson {
 		this.students = null;
 		this.institution = institution;
 	}
+	
+	public Lesson(String name, User teacher, Institution institution) {
+		this.id = -1;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = null;
+		this.institution = institution;
+	}
 
 	public Lesson(int id, String name, User teacher, Institution institution, boolean active) {
 		this.id = id;
+		this.name = name;
+		this.teacher = teacher;
+		this.students = null;
+		this.institution = institution;
+		this.active = active;
+	}
+	
+	public Lesson(String name, User teacher, Institution institution, boolean active) {
+		this.id = -1;
 		this.name = name;
 		this.teacher = teacher;
 		this.students = null;

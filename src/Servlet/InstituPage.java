@@ -22,18 +22,13 @@ public class InstituPage extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Institution institution = null;
-		for (Institution institu : TestDAL.institutions) {
-			if (institu.getId() == id) {
-				institution = institu;
-				break;
-			}
-		}
+		institution = InstitutionDAL.getInstitution(id);
 		if (institution == null) {
 			response.sendRedirect(request.getContextPath() + "/Institution.jsp");
 			return;
 		}
+		institution.setClasses(LessonDAL.getLessonByInstitution(institution.getId()));
 		request.setAttribute("Institution", institution);
-		response.setContentType("text/html; charset=utf-8");
 		request.getRequestDispatcher("InstitutionPage.jsp").include(request, response);
 	}
 }
