@@ -23,28 +23,30 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		User user = new User();
 		
-		user.setEmail(request.getParameter("UserEmail"));
 		
 		String password = (request.getParameter("UserPassword"));
-		
-		user = UserDAL.userAutentication(user, password);
+		user = UserDAL.getUser(request.getParameter("UserEmail"));
+//		user = UserDAL.userAutentication(user, password);
 
-		// como iremos vefiricas se o usuario existe no banco de dados, toda a logica
-		// abaixo é apenas uma demonstração simplificada do que devera acontecer.
-		
-//		if (user.getEmail().equals(UserDAL.user.getEmail())) {
-//			if (password.equals(UserDAL.password)) {
 				
-		if(user != null){ 
+		if(user == null){ 
 			
-				HttpSession session=request.getSession();  
-		        session.setAttribute("user",user);  
-				System.out.println(user);
-				request.getRequestDispatcher("/validation").include(request, response); 
+			String msg ="Email Inválida ou inexistente";
+			request.setAttribute("Msg", msg);
+			request.getRequestDispatcher("/Login.jsp").include(request, response);
+			return;
 			
-//			}
-		} else {// send a response with info telling the user something was wrong
-			response.sendRedirect(request.getContextPath() + "/Login.jsp");
-		}
+		} 
+		if (!UserDAL.userAutentication(user, password)) {
+			String msg ="Senha Inválida";
+			request.setAttribute("Msg", msg);
+			request.getRequestDispatcher("/Login.jsp").include(request, response);
+			
+			return;
+		} 
+		HttpSession session=request.getSession();  
+        session.setAttribute("user",user); 
+		System.out.println(user);
+		request.getRequestDispatcher("/validation").include(request, response); 
 	}
 }

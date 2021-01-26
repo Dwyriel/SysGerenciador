@@ -18,11 +18,18 @@ body {
   padding-top: 56px;
 }
 </style>
-<%
-      		HttpSession s = request.getSession(false);  
-      		User user = (User)s.getAttribute("user");
-      		
-      %>
+	<%
+		if(session.getAttribute("user") == null) {
+			String alert ="Você precisa estar logado";
+			request.setAttribute("Alert", alert);
+			request.getRequestDispatcher("/Login.jsp").include(request, response);
+			return;
+			
+				  }
+				HttpSession sessionLog = request.getSession(false);
+				User user = (User)sessionLog.getAttribute("user");
+					  	
+					 %>
 </head>
 
 <body>
@@ -127,6 +134,7 @@ body {
           </div>
         </div>
       </div>
+  
 
     </div>
     <!-- /.row -->

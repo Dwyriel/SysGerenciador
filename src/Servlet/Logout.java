@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
-
+import classes.users.*;
 @WebServlet("/Logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -16,11 +16,17 @@ public class Logout extends HttpServlet {
   
     }
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+    	HttpSession session = request.getSession(false);
+    	
+    	if(session.getAttribute("user") != null) {
+		
 		session.invalidate();
 		
-		response.sendRedirect("Login.jsp");
+		User user = null;
 		
+		
+		response.sendRedirect("Login.jsp");
+    	}
 	}
 
 }

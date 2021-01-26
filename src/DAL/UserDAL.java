@@ -181,25 +181,26 @@ public class UserDAL {
 			Conexao.closeConnection();
 		}
 	}
-	public static User userAutentication(User user, String password) {
-
+	public static boolean userAutentication(User user, String password) {
+		boolean auth = false;
 		try {
 			Connection connection = Conexao.getConnection();
 
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?");
-			statement.setString(1, user.getEmail());
-			statement.setString(2, password);
+			PreparedStatement statement = connection.prepareStatement("SELECT CASE WHEN password = ? THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
+			
+			statement.setString(1, password);
+			statement.setString(2, user.getEmail());
 			
 			ResultSet resultSet = statement.executeQuery();
-
+			
 			if (resultSet.next()) {
-			user = new User(resultSet.getString("name"), resultSet.getString("email"),resultSet.getInt("id"), UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+			auth = resultSet.getBoolean("Result");
 			 	
 			}
-			return user;
+			return auth;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
-			return null;
+			return auth;
 		} finally {
 			Conexao.closeConnection();
 		}

@@ -8,6 +8,11 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <title>Insert title here</title>
+<%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
+request.setAttribute("Msg", null);};
+
+	    String alert = null; if(request.getAttribute("Alert") != null ){ alert = (String)request.getAttribute("Alert");}  
+ if (alert != null ) { %> 	<script> alert("<%= alert %>"); </script> 	<% } %>
 </head>
 <style>
 body {
@@ -105,13 +110,15 @@ body {
 	                  <div class="form-group">
 	                     <label>Password</label>
 	                     <input type="password" name="UserPassword" class="form-control" placeholder="Password" required>
+	                     <% if(msg != null) { %>
+	                    	<span style="color: red;"><%= msg %></span> 
+	                     <% msg=null; }   %>
 	                  </div>
 	                  <button type="submit" class="btn btn-black">Login</button>
 	                  <a type="submit" class="btn btn-secondary" href="Register.jsp">Register</a>
 	               </form>
 	            </div>
 	         </div>
-	      </div>
-
+	         </div>
 </body>
 </html>

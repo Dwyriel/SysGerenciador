@@ -25,7 +25,8 @@ public class validation extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession(false);  
         if(session!=null){  
-        	User user =(User)session.getAttribute("user");  
+        	User user =(User)session.getAttribute("user");
+        	request.getSession().setAttribute(getServletName(), user);
         	request.setAttribute("User", user);
         	request.getRequestDispatcher("Content.jsp").include(request, response);
         }  
