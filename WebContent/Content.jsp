@@ -25,9 +25,8 @@ body {
 			request.getRequestDispatcher("/Login.jsp").include(request, response);
 			return;
 			}	
-				HttpSession sessionLog = request.getSession(false);
-				User user = (User)sessionLog.getAttribute("user");
-					  	
+				User user = (User)session.getAttribute("user");
+					 
 					 %>
 </head>
 

@@ -44,9 +44,9 @@ public class Login extends HttpServlet {
 			
 			return;
 		} 
-		HttpSession session=request.getSession(); 
+		HttpSession session=request.getSession();
         session.setAttribute("user",user);
 		System.out.println(user);
-		request.getRequestDispatcher("/Content.jsp").include(request, response); 
+		response.sendRedirect(request.getContextPath() + "/Content.jsp");
 	}
 }
