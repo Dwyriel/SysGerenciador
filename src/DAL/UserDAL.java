@@ -11,7 +11,7 @@ public class UserDAL {
 		try {
 		
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,SHA1(?),?,?)", Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getEmail());
 			statement.setString(3, password);
@@ -183,7 +183,7 @@ public class UserDAL {
 		try {
 			Connection connection = Conexao.getConnection();
 
-			PreparedStatement statement = connection.prepareStatement("SELECT CASE WHEN password = ? THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
+			PreparedStatement statement = connection.prepareStatement("SELECT CASE WHEN password = SHA1(?) THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
 			
 			statement.setString(1, password);
 			statement.setString(2, user.getEmail());
