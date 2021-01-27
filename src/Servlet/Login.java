@@ -26,8 +26,6 @@ public class Login extends HttpServlet {
 		
 		String password = (request.getParameter("UserPassword"));
 		user = UserDAL.getUser(request.getParameter("UserEmail"));
-//		user = UserDAL.userAutentication(user, password);
-
 				
 		if(user == null){ 
 			

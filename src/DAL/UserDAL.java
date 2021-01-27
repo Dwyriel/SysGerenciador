@@ -7,12 +7,9 @@ import classes.*;
 
 public class UserDAL {
 
-	public static User user = new User();
-	public static String password;
-
 	public static User insertUser(User user, String password) {
 		try {
-			user.setActive(true);
+		
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
@@ -190,6 +187,30 @@ public class UserDAL {
 			
 			statement.setString(1, password);
 			statement.setString(2, user.getEmail());
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+			auth = resultSet.getBoolean("Result");
+			 	
+			}
+			return auth;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return auth;
+		} finally {
+			Conexao.closeConnection();
+		}
+	}
+	public static boolean emailAutentication(String Email) {
+		boolean auth = false;
+		try {
+			Connection connection = Conexao.getConnection();
+
+			PreparedStatement statement = connection.prepareStatement("SELECT CASE WHEN email = ? THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
+			
+			statement.setString(1, Email);
+			statement.setString(2, Email);
 			
 			ResultSet resultSet = statement.executeQuery();
 			

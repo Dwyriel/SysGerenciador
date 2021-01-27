@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="javax.servlet.http.*,classes.*,classes.users.*" %>
+     <%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
+request.setAttribute("Msg", null);}; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +17,9 @@
 		  <div class="form-group">
 		    <label for="txtEmail">Email</label>
 		    <input type="email" class="form-control col-md-8" id="txtEmail"  name="txtEmail" placeholder="Seu email">
+		     	<% if(msg != null) { %>
+	             <span style="color: red;"><%= msg %></span> 
+	            <% msg=null; }   %>
 		  </div>
 		  <div class="form-group">
 		    <label for="txtName">nome</label>
@@ -35,7 +41,8 @@
 		  <button type="submit" class="btn btn-primary">Enviar</button>
 		</div>
 		<div>
-		<a href="DelTest.jsp">deletar UserTest</a>
+		<a href="DelTest.jsp" class="btn btn-secondary">deletar UserTest</a>
+		
 		</div>
 		
 </form>

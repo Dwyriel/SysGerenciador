@@ -19,17 +19,40 @@ public class Register extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		User user = new User(
-				request.getParameter("txtName"),
-				request.getParameter("txtEmail"),
-				UserType.valueOfNumber(Integer.parseInt(request.getParameter("UserType"))));
-		String password = (request.getParameter("txtPassword"));
-		UserDAL.user = user;
-		UserDAL.password = password;
-		System.out.println(UserDAL.user);
-
-		user = UserDAL.insertUser(user, password);
 		
-		response.sendRedirect(request.getContextPath() + "/Login.jsp");
+	
+		boolean validation;
+		String Email = request.getParameter("txtEmail");
+		validation = UserDAL.emailAutentication(Email);	
+		
+		if(validation == true){ 
+			String msg ="Email em Uso";
+			request.setAttribute("Msg", msg);
+			request.getRequestDispatcher("/Register.jsp").include(request, response);
+			return;
+		} 
+			User user = new User(
+					request.getParameter("txtName"),
+					request.getParameter("txtEmail"),
+					UserType.valueOfNumber(Integer.parseInt(request.getParameter("UserType"))));
+					
+			String password = (request.getParameter("txtPassword"));
+	
+			System.out.println(user);
+			
+			user = UserDAL.insertUser(user, password);
+			
+			String alert ="Usuário cadastrado com sucesso";
+			
+			request.setAttribute("Alert", alert);
+			
+			request.getRequestDispatcher("/Login.jsp").include(request, response);
+			
+			return;
+		
+		
+		
+		
+		
 	}
 }
