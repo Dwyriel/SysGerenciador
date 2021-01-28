@@ -17,8 +17,8 @@ request.setAttribute("Msg", null);}; %>
 	
 	<div class="sidenav">
 	         <div class="login-main-text">
-	            <h2>página de Login</h2>
-	            <p>Faça Login ou se Registre para ter acesso .</p>
+	            <h2>Backbox</h2>
+	            <p>Faça Login ou se Registre para ter acesso.</p>
 	         </div>
 	      </div>
 	      <div class="main">
@@ -37,7 +37,7 @@ request.setAttribute("Msg", null);}; %>
 	                     <% msg=null; }   %>
 	                  </div>
 	                  <button type="submit" class="btn btn-black">Login</button>
-	                  <a type="submit" class="btn btn-secondary" href="Register.jsp">Registrar</a>
+	                 <!--  <a type="submit" class="btn btn-secondary" href="Register.jsp">Registrar</a>  -->
 	               </form>
 	            </div>
 	         </div>

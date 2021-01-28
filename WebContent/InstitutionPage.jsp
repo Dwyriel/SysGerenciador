@@ -1,11 +1,6 @@
 <%@ include file="header.jsp" %>
 <body>
 	<%
-	if (session.getAttribute("user") == null) {
-		request.getRequestDispatcher("Login.jsp").include(request, response);
-		return;
-	}
-	User user = (User) session.getAttribute("user");
 	if (request.getAttribute("Institution") == null) {
 		response.sendRedirect(request.getContextPath() + "/Institution.jsp");
 		return;
