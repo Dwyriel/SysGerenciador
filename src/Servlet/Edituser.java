@@ -53,6 +53,8 @@ public class Edituser extends HttpServlet {
 		userUpdate.setType(loggedUser.getType());
 		UserDAL.updateUser(userUpdate, passwordOne);
 		
+		session.invalidate();
+		
 		String alert="Dados de Usuário alterados com sucesso, efetue Login novamente";
 		
 		request.setAttribute("Alert", alert);

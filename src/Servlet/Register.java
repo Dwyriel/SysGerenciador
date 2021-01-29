@@ -46,21 +46,27 @@ public class Register extends HttpServlet {
 			user = UserDAL.insertUser(user, password);
 		
 			if (user.getType() == UserType.InstitutionAdmin) {
+				
 			HttpSession session = request.getSession();
 			
 			User loggedUser = (User) session.getAttribute("user");
 	
-			user = UserDAL.getUser(user.getEmail());
-			
-			//Institution InstitutionId = new Institution();
+		
+			if (loggedUser.getType() == UserType.InstitutionAdmin) {
+				
+				user = UserDAL.getUser(user.getEmail());
+				
 			InstitutionAdmin CurrentAdmin = new InstitutionAdmin();
+			
 			CurrentAdmin = AdminDAL.getAdmin(loggedUser.getId());
 			
 			InstitutionAdmin NewAdmin = new InstitutionAdmin();
+			
 			NewAdmin.setId(user.getId());
+			
 			NewAdmin.setInstitution(CurrentAdmin.getInstitution());
 			AdminDAL.insertAdmin(NewAdmin);
-
+			}
 			}
 			
 
