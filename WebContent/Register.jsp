@@ -1,23 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ page import="javax.servlet.http.*,classes.*,classes.users.*" %>
-     <%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
-request.setAttribute("Msg", null);}; %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="style/Login.css" media="screen" />
-<title>Insert title here</title>
-</head>
+<%@ include file="header.jsp" %>
+    <%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
+		request.setAttribute("Msg", null);}; %>
+	 <% if(user.getType() != UserType.InstitutionAdmin && user.getType() != UserType.ServerAdmin) {
+				String alert ="Você não tem permissão para acessar está página";
+				request.setAttribute("Alert", alert);
+				request.getRequestDispatcher("/Login.jsp").include(request, response);
+				return;
+				}	
+				%>
+				<%
+	    String alert = null; if(request.getAttribute("Alert") != null ){ alert = (String)request.getAttribute("Alert");}  
+ if (alert != null ) { %> 	<script> alert("<%= alert %>"); </script> 	<% } %>
 <body>
-<div class="sidenav">
-   <div class="login-main-text">
-      <h2>Blackbox</h2>
-      <p>Página de Registro.</p>
-   </div>
-</div>
 <div class="main">
 	   <div class="col-md-6 col-sm-12">
 	      <div class="login-form">
@@ -35,9 +29,22 @@ request.setAttribute("Msg", null);}; %>
 			</div>
 	            <div class="form-group">
 	              <label for="txtPassword">Senha</label>
-			<input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Senha">
+					<input type="password" class="form-control" id="txtPassword" name="txtPassword" placeholder="Senha">
 	            </div>
-	            <button type="submit" class="btn btn-black">Enviar</button>
+	            <div class="form-group">		            
+				   <select id="UserType" name="UserType" class="form-control">
+				   	<% if(user.getType() == UserType.ServerAdmin) { %>
+            			<option value="0">Administrador Site</option>
+            		<% }  %>	
+				   		<option value="1">Administrador Instituição</option>	
+				   		<% if(user.getType() == UserType.InstitutionAdmin) { %>
+            			<option value="2">Professor</option>		            
+				   		<option value="3">Aluno</option>
+            		<% }  %>
+				   		
+				   </select>
+		   	</div>	
+	            <button type="submit" class="btn btn-black">Cadastrar</button>
 	            <a type="submit" class="btn btn-secondary" href="Login.jsp">Voltar</a>
 	         </form>
 	      </div>

@@ -6,17 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAL.UserDAL;
+import classes.users.User;
 
 
 
 @WebServlet("/deltestuser")
-public class deltestuser extends HttpServlet {
+public class DelUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public deltestuser() {
+    public DelUser() {
         super();
      
     }
@@ -24,15 +26,21 @@ public class deltestuser extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		HttpSession session = request.getSession();
+		User loggedUser = (User) session.getAttribute("user");
 		
-		String par = request.getParameter("iduser").toString();
-		int numero = Integer.parseInt(par);
-		
-		
-		UserDAL.deleteUser(numero);
+		int id = loggedUser.getId();
 		
 		
-		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		UserDAL.deleteUser(id);
+		
+		String alert="Conta deletada";
+		
+		request.setAttribute("Alert", alert);
+		
+		request.getRequestDispatcher("/Login.jsp").include(request, response);
+		
+		return;
 		
 		
 	}
