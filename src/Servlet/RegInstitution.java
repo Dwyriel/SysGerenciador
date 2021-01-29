@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import classes.users.*;
 import classes.*;
 import DAL.*;
@@ -34,7 +36,18 @@ public class RegInstitution extends HttpServlet{
 				if (UserDAL.updateUser(admin))
 					admin = AdminDAL.insertAdmin(admin);
 		}
-
-		response.sendRedirect(request.getContextPath() + "/Institution.jsp");
+		HttpSession session = request.getSession();
+		User loggedUser = (User) session.getAttribute("user");
+		switch(user.getType()) {
+			case InstitutionAdmin:
+				response.sendRedirect(request.getContextPath() + "/Institution.jsp");
+				break;
+			case ServerAdmin: 
+				response.sendRedirect(request.getContextPath() + "/AdminPainel.jsp");
+				break;
+			default:
+				response.sendRedirect(request.getContextPath() + "/Institution.jsp");
+				break;
+		}
 	}
 }

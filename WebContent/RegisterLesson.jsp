@@ -1,21 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"
-	import="javax.servlet.http.*, classes.*, classes.users.* , DAL.*, java.util.ArrayList, java.util.List"%>
-<!DOCTYPE html>
-<html>
-<head>
-<%
-//TODO check if user is admin, redirect if false
-%>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-	crossorigin="anonymous">
-</head>
+<%@ include file="header.jsp" %>
 <% if(request.getAttribute("institution") == null){
 	response.sendRedirect(request.getContextPath() + "/Institution.jsp");
 	return;
@@ -32,8 +15,8 @@ Institution institution = (Institution) request.getAttribute("institution");%>
 			<datalist id="datalistOptions">
 				<%
 				List<User> userList = UserDAL.getAllUsers();
-				for (User user : userList) { %>
-					<option value="<%=user.getEmail()%>">
+				for (User tempUser : userList) { %>
+					<option value="<%=tempUser.getEmail()%>">
 					<% } %>				
 			</datalist>
 			
