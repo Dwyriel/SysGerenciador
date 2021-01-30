@@ -9,9 +9,10 @@ public class UserDAL {
 
 	public static User insertUser(User user, String password) {
 		try {
-		
+
 			Connection connection = Conexao.getConnection();
-			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,SHA1(?),?,?)", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES(null,?,?,SHA1(?),?,?)",
+					Statement.RETURN_GENERATED_KEYS);
 			statement.setString(1, user.getName());
 			statement.setString(2, user.getEmail());
 			statement.setString(3, password);
@@ -65,7 +66,7 @@ public class UserDAL {
 			Conexao.closeConnection();
 		}
 	}
-	
+
 	public static boolean deleteUserRelations(int id) {
 		try {
 			Connection connection = Conexao.getConnection();
@@ -114,7 +115,6 @@ public class UserDAL {
 	}
 
 	public static User getUser(int id) {
-
 		try {
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
@@ -133,9 +133,8 @@ public class UserDAL {
 			Conexao.closeConnection();
 		}
 	}
-	
-	public static User getUser(String email) {
 
+	public static User getUser(String email) {
 		try {
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
@@ -155,21 +154,19 @@ public class UserDAL {
 		}
 	}
 
-	public static List<User> getAllUsers() {
+	public static List<User> getAllUsersOfType(UserType usertype) {
 		try {
 			List<User> userList = new ArrayList<User>();
 			Connection connection = Conexao.getConnection();
 
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
-
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE usertype = ?");
+			statement.setInt(1, usertype.value);
 			ResultSet resultSet = statement.executeQuery();
-
 			while (resultSet.next()) {
 				User user = new User(resultSet.getString("name"), resultSet.getString("email"), resultSet.getInt("id"),
 						UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
 				userList.add(user);
 			}
-
 			return userList;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -178,21 +175,43 @@ public class UserDAL {
 			Conexao.closeConnection();
 		}
 	}
+
+	public static List<User> getAllUsers() {
+		try {
+			List<User> userList = new ArrayList<User>();
+			Connection connection = Conexao.getConnection();
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				User user = new User(resultSet.getString("name"), resultSet.getString("email"), resultSet.getInt("id"),
+						UserType.valueOfNumber(resultSet.getInt("usertype")), resultSet.getBoolean("active"));
+				userList.add(user);
+			}
+			return userList;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		} finally {
+			Conexao.closeConnection();
+		}
+	}
+
 	public static boolean userAutentication(User user, String password) {
 		boolean auth = false;
 		try {
 			Connection connection = Conexao.getConnection();
 
-			PreparedStatement statement = connection.prepareStatement("SELECT CASE WHEN password = SHA1(?) THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
-			
+			PreparedStatement statement = connection.prepareStatement(
+					"SELECT CASE WHEN password = SHA1(?) THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
+
 			statement.setString(1, password);
 			statement.setString(2, user.getEmail());
-			
+
 			ResultSet resultSet = statement.executeQuery();
-			
+
 			if (resultSet.next()) {
-			auth = resultSet.getBoolean("Result");
-			 	
+				auth = resultSet.getBoolean("Result");
+
 			}
 			return auth;
 		} catch (Exception ex) {
@@ -202,21 +221,23 @@ public class UserDAL {
 			Conexao.closeConnection();
 		}
 	}
+
 	public static boolean emailAutentication(String Email) {
 		boolean auth = false;
 		try {
 			Connection connection = Conexao.getConnection();
 
-			PreparedStatement statement = connection.prepareStatement("SELECT CASE WHEN email = ? THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
-			
+			PreparedStatement statement = connection.prepareStatement(
+					"SELECT CASE WHEN email = ? THEN 1 ELSE 0 END 'Result' FROM users where email = ?;");
+
 			statement.setString(1, Email);
 			statement.setString(2, Email);
-			
+
 			ResultSet resultSet = statement.executeQuery();
-			
+
 			if (resultSet.next()) {
-			auth = resultSet.getBoolean("Result");
-			 	
+				auth = resultSet.getBoolean("Result");
+
 			}
 			return auth;
 		} catch (Exception ex) {
