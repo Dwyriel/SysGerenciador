@@ -7,7 +7,7 @@
 	}
 	Institution institution = (Institution) request.getAttribute("Institution");
 	%>
-	<h1><%=institution.getName()%></h2>
+	<h1><%=institution.getName()%></h1>
 		<%
 		if (user.getType() == UserType.InstitutionAdmin || user.getType() == UserType.ServerAdmin) {
 			InstitutionAdmin admin = null;
@@ -26,13 +26,24 @@
 		<%
 		} else
 		for (Lesson lesson : institution.getClasses()) {
+			lesson.setStudents(LessonStudentDAL.getStudentsByLesson(lesson.getId()));
 		%>
 		<p>
 			Aula:
 			<%=lesson.getName()%>
 			ID:
 			<%=lesson.getId()%></p>
-		<%
+			<a class="btn btn-primary" href="<%=request.getContextPath()%>/AddStudent?id=<%=lesson.getId()%>">Adicionar aluno</a>
+			<p>Students:</p>
+			<% 
+			if (lesson.getStudents() == null || (lesson.getStudents() != null && lesson.getStudents().isEmpty())) {
+				%>
+				<span>Esta Aula nao possui alunos ainda.</span>
+				<%
+			} else
+			for(User student : lesson.getStudents()){
+				%> <br><%=student.getName() %> <% 
+			}
 		}
 		%>
 	

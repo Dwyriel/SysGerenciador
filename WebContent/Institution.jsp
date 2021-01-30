@@ -6,7 +6,7 @@
 		<div class="text-center">
 			<%
 			List<Institution> institutionList = InstitutionDAL.getAllInstitutions();
-			if (!institutionList.isEmpty())
+			if (institutionList != null || !institutionList.isEmpty())
 				for (Institution institution : institutionList) {
 			%>
 			<div class="card" style="width: 18rem;">

@@ -37,7 +37,7 @@ public class Register extends HttpServlet {
 			User user = new User(
 					request.getParameter("txtName"),
 					request.getParameter("txtEmail"),
-					UserType.valueOfNumber(Integer.parseInt(request.getParameter("UserType"))));
+					UserType.valueOfNumber(Integer.parseInt(request.getParameter("UserType"))), true);
 			
 			String password = (request.getParameter("txtPassword"));
 	
