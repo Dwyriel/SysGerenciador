@@ -1,4 +1,10 @@
 <%@ include file="header.jsp" %>
+<% if(user.getType() == UserType.Student || user.getType() == UserType.InstitutionAdmin) {
+	response.sendRedirect(request.getContextPath() + "/Login.jsp");
+	return;
+}
+	%>
+
 
 <body>
 	<!--SideNav-->

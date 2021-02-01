@@ -1,4 +1,9 @@
 <%@ include file="header.jsp" %>
+<% if(user.getType() != UserType.ServerAdmin) {
+	response.sendRedirect(request.getContextPath() + "/Login.jsp");
+	return;
+}
+	%>
 <body>
 	<div class="container">
 		<a class="btn" href="<%=request.getContextPath()%>/Register_Institution.jsp">New Institution</a>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-     <%@ page import="javax.servlet.http.*,classes.*,classes.users.*" %>
+     <%@ page import="javax.servlet.http.*,classes.*,classes.users.*, DAL.*" %>
      <%		String msg = null; if(request.getAttribute("Msg") != null ) { msg = (String)request.getAttribute("Msg"); 
 request.setAttribute("Msg", null);}; %>
 <%
@@ -17,7 +17,7 @@ request.setAttribute("Msg", null);}; %>
 			 
         }  else if (user.getType() == UserType.InstitutionAdmin){
     
-       	 response.sendRedirect(request.getContextPath() + "/InstitutionPage.jsp");
+       	 response.sendRedirect(request.getContextPath() + "/InstituPage?id="+AdminDAL.getAdmin(user.getId()).getInstitution().getId());
  
   		 }  else if (user.getType() == UserType.Teacher){
   			 
@@ -25,7 +25,7 @@ request.setAttribute("Msg", null);}; %>
         
   		 } else if (user.getType() == UserType.Student){   
   			 
-  			response.sendRedirect(request.getContextPath() + "/InstitutionPage.jsp");
+  			response.sendRedirect(request.getContextPath() + "/InstituPage?id="+ LessonStudentDAL.getLessonsByStudent(user.getId()).get(0).getInstitution().getId());
   			
   		 } else {	 
   			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");

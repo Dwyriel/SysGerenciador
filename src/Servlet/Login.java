@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 			 
          }  else if (user.getType() == UserType.InstitutionAdmin){
      
-        	 response.sendRedirect(request.getContextPath() + "/InstitutionPage.jsp");
+        	 response.sendRedirect(request.getContextPath() + "/InstituPage?id="+AdminDAL.getAdmin(user.getId()).getInstitution().getId());
   
    		 }  else if (user.getType() == UserType.Teacher){
    			 
@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
          
    		 } else if (user.getType() == UserType.Student){   
    			 
-   			response.sendRedirect(request.getContextPath() + "/Content.jsp");
+   			response.sendRedirect(request.getContextPath() + "/InstituPage?id="+ LessonStudentDAL.getLessonsByStudent(user.getId()).get(0).getInstitution().getId());
    		 } else {
    			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");
    		 }

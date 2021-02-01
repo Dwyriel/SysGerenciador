@@ -45,13 +45,17 @@
         <ul class="navbar-nav ml-auto">
           
           <li class="nav-item">
-     		<% if(user.getType() == UserType.ServerAdmin) { %>
-            <a class="nav-link" href="Institution.jsp">Admin Painel</a>
+     		<% if(user.getType() == UserType.Teacher) { %>
+            <a class="nav-link" href="Institution.jsp">Instituições</a>
+            <% } if (user.getType() == UserType.ServerAdmin) { %>
+            <a class="nav-link" href="AdminPainel.jsp">Painel do Admin</a>
             <% } %>
           </li>
          	<li>
          	<% if(user.getType() == UserType.ServerAdmin || user.getType() == UserType.InstitutionAdmin) { %>
             <a class="nav-link" href="Register.jsp">Registro de Usuários</a>
+            <% } if(user.getType() == UserType.Student) {%>
+            <a class="nav-link" href="<%=request.getContextPath()%>/InstituPage?id=<%=LessonStudentDAL.getLessonsByStudent(user.getId()).get(0).getInstitution().getId()%>">Minha Instituição</a>
             <% } %>
          	</li>
           <li class="nav-item dropdown">
