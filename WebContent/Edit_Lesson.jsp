@@ -8,7 +8,7 @@ Lesson lesson = (Lesson) request.getAttribute("lesson");%>
 	<div class="container">
 		<form method="post" action="<%=request.getContextPath()%>/EditLesson">
 			<label for="LessonName" class="form-label">Nome da classe:</label> 
-			<input class="form-control" type="text"	name="LessonName" required <%= lesson.getName() %>> 
+			<input class="form-control" type="text"	name="LessonName" required value="<%= lesson.getName() %>"> 
 			
 			<label for="datalist" class="form-label">Professor:</label> 
 			<input class="form-control" list="datalistOptions" id="datalist" name="Teacher" placeholder="Type to search..." value="<%= lesson.getTeacher().getEmail() %>">

@@ -15,11 +15,11 @@ public class Conexao {
 	 * We can either remove this or go back to how it was
 	 */
 
-	private static final String servidor = "b0ct7gpszqljrkihasaa-mysql.services.clever-cloud.com";
+	private static final String servidor = "127.0.0.1";
 	private static final String porta = "3306";
-	private static final String bancoDados = "b0ct7gpszqljrkihasaa";
-	private static final String usuario = "ufjxrkklmrtvulik";
-	private static final String senha = "e89vbO8hjokn9h1EFndV";
+	private static final String bancoDados = "localhost";
+	private static final String usuario = "root";
+	private static final String senha = "";
 
 	public static Connection getConnection() {
 		Connection connection = null;
