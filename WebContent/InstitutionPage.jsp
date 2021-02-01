@@ -1,7 +1,7 @@
 <%@ include file="header.jsp" %>
 <body>
 	<%
-	if (request.getAttribute("Institution") == null) {
+	if ((Institution)request.getAttribute("Institution") == null) {
 		response.sendRedirect(request.getContextPath() + "/Institution.jsp");
 		return;
 	}
@@ -34,7 +34,8 @@
 			ID:
 			<%=lesson.getId()%></p>
 			<a class="btn btn-primary" href="<%=request.getContextPath()%>/AddStudent?id=<%=lesson.getId()%>">Adicionar aluno</a>
-			<p>Students:</p>
+			<a class="btn btn-primary" href="<%=request.getContextPath()%>/EditLesson?id=<%=lesson.getId()%>">Editar aula</a>
+			<p>Alunos:</p>
 			<% 
 			if (lesson.getStudents() == null || (lesson.getStudents() != null && lesson.getStudents().isEmpty())) {
 				%>
@@ -42,7 +43,7 @@
 				<%
 			} else
 			for(User student : lesson.getStudents()){
-				%> <br><%=student.getName() %> <% 
+				%> <%=student.getName() %><br> <% 
 			}
 		}
 		%>

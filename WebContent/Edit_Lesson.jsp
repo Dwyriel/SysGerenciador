@@ -1,17 +1,17 @@
 <%@ include file="header.jsp" %>
-<% if(request.getAttribute("institution") == null){
+<% if(request.getAttribute("lesson") == null){
 	response.sendRedirect(request.getContextPath() + "/Institution.jsp");
 	return;
 }
-Institution institution = (Institution) request.getAttribute("institution");%>
+Lesson lesson = (Lesson) request.getAttribute("lesson");%>
 <body>
 	<div class="container">
-		<form method="post" action="<%=request.getContextPath()%>/RegLesson">
+		<form method="post" action="<%=request.getContextPath()%>/EditLesson">
 			<label for="LessonName" class="form-label">Nome da classe:</label> 
-			<input class="form-control" type="text"	name="LessonName" required> 
+			<input class="form-control" type="text"	name="LessonName" required <%= lesson.getName() %>> 
 			
 			<label for="datalist" class="form-label">Professor:</label> 
-			<input class="form-control" list="datalistOptions" id="datalist" name="Teacher" placeholder="Type to search...">
+			<input class="form-control" list="datalistOptions" id="datalist" name="Teacher" placeholder="Type to search..." value="<%= lesson.getTeacher().getEmail() %>">
 			<datalist id="datalistOptions">
 				<%
 				List<User> userList = UserDAL.getAllUsersOfType(UserType.Teacher);
@@ -20,9 +20,9 @@ Institution institution = (Institution) request.getAttribute("institution");%>
 					<% } %>				
 			</datalist>
 			
-			<input class="visually-hidden" type="number" name="InstitutionId" value="<%=institution.getId()%>" required>
-			
-			<button type="submit" class="btn btn-primary">Registrar</button>
+			<input class="visually-hidden" type="number" name="LessonId" value="<%=lesson.getId()%>" required>
+						
+			<button type="submit" class="btn btn-primary">Atualizar</button>
 		</form>
 	</div>
 	<script
@@ -30,4 +30,4 @@ Institution institution = (Institution) request.getAttribute("institution");%>
 		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
 		crossorigin="anonymous"></script>
 </body>
-</html>
+	

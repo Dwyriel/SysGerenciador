@@ -1,16 +1,14 @@
 package classes.users;
 
-import java.util.List;
+import java.util.*;
 import classes.*;
 
 public class Teacher extends User {
-	private List<Institution> institutions;
-	private List<Lesson> lessons;
+	private List<Institution> institutions = new ArrayList<Institution>();
+	private List<Lesson> lessons = new ArrayList<Lesson>();
 
 	public Teacher() {
 		super();
-		this.institutions = null;
-		this.lessons = null;
 	}
 
 	public Teacher(String email) {
@@ -19,26 +17,19 @@ public class Teacher extends User {
 
 	public Teacher(String name, String email) {
 		super(name, email);
-		this.institutions = null;
-		this.lessons = null;
 	}
 
 	public Teacher(String name, String email, UserType type) {
 		super(name, email, type);
-		this.institutions = null;
-		this.lessons = null;
 	}
 
 	public Teacher(String name, String email, UserType type, boolean active) {
 		super(name, email, type, active);
-		this.institutions = null;
-		this.lessons = null;
 	}
 
 	public Teacher(String name, String email, UserType type, boolean active, List<Institution> institutions) {
 		super(name, email, type, active);
 		this.institutions = institutions;
-		this.lessons = null;
 	}
 
 	public Teacher(String name, String email, UserType type, boolean active, List<Institution> institutions,
@@ -50,14 +41,10 @@ public class Teacher extends User {
 
 	public Teacher(String name, String email, int id, UserType type, boolean active) {
 		super(name, email, id, type, active);
-		this.institutions = null;
-		this.lessons = null;
 	}
 
 	public Teacher(User user) {
 		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
-		this.institutions = null;
-		this.lessons = null;
 	}
 
 	public Teacher(String name, String email, int id, UserType type, boolean active, List<Institution> institutions,

@@ -5,28 +5,21 @@ import java.util.List;
 import classes.users.User;
 
 public class Institution {
-	private int id;
-	private String name;
+	private int id = -1;
+	private String name = "";
 	private List<Lesson> classes = new ArrayList<Lesson>();
 	private List<User> Admins = new ArrayList<User>();
 	// TODO forum
 
-	public Institution() {
-		this.name = null;
-		this.id = -1;
-		this.classes = null;
-	}
+	public Institution() {}
 
 	public Institution(String name) {
 		this.name = name;
-		this.id = -1;
-		this.classes = null;
 	}
 
 	public Institution(int id, String name) {
 		this.name = name;
 		this.id = id;
-		this.classes = null;
 	}
 
 	public Institution(int id, String name, List<Lesson> lessons) {

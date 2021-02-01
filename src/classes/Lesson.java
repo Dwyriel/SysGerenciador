@@ -1,55 +1,37 @@
 package classes;
 
-import java.util.List;
+import java.util.*;
 import classes.users.*;
 
 public class Lesson {
-	private int id;
-	private String name;
-	private User teacher;
-	private List<User> students;
+	private int id = -1;
+	private String name = "";
+	private User teacher = new User();
+	private List<User> students = new ArrayList<User>();
 	private Institution institution;
 	private boolean active = true;
 
 	// TODO forum, assignments, class material
 
-	public Lesson() {
-		this.id = -1;
-		this.name = null;
-		this.teacher = null;
-		this.students = null;
-		this.institution = null;
-	}
+	public Lesson() {}
 
 	public Lesson(String nome) {
-		this.id = -1;
 		this.name = nome;
-		this.teacher = null;
-		this.students = null;
-		this.institution = null;
 	}
 
 	public Lesson(int id, String name) {
 		this.id = id;
 		this.name = name;
-		this.teacher = null;
-		this.students = null;
-		this.institution = null;
 	}
 
 	public Lesson(int id, String name, Institution institution) {
 		this.id = id;
 		this.name = name;
-		this.teacher = null;
-		this.students = null;
 		this.institution = institution;
 	}
 	
 	public Lesson(String name, Institution institution) {
-		this.id = -1;
 		this.name = name;
-		this.teacher = null;
-		this.students = null;
 		this.institution = institution;
 	}
 
@@ -57,23 +39,18 @@ public class Lesson {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
-		this.students = null;
-		this.institution = null;
 	}
 
 	public Lesson(int id, String name, User teacher, Institution institution) {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
-		this.students = null;
 		this.institution = institution;
 	}
 	
 	public Lesson(String name, User teacher, Institution institution) {
-		this.id = -1;
 		this.name = name;
 		this.teacher = teacher;
-		this.students = null;
 		this.institution = institution;
 	}
 
@@ -81,7 +58,6 @@ public class Lesson {
 		this.id = id;
 		this.name = name;
 		this.teacher = teacher;
-		this.students = null;
 		this.institution = institution;
 		this.active = active;
 	}
@@ -90,7 +66,6 @@ public class Lesson {
 		this.id = -1;
 		this.name = name;
 		this.teacher = teacher;
-		this.students = null;
 		this.institution = institution;
 		this.active = active;
 	}
@@ -100,7 +75,6 @@ public class Lesson {
 		this.name = name;
 		this.teacher = teacher;
 		this.students = students;
-		this.institution = null;
 	}
 
 	public Lesson(int id, String name, User teacher, List<User> students, Institution institution) {

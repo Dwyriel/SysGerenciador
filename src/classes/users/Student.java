@@ -1,16 +1,14 @@
 package classes.users;
 
-import java.util.List;
+import java.util.*;
 import classes.*;
 
 public class Student extends User {
-	private Institution institution;
-	private List<Lesson> lessons;
+	private Institution institution = new Institution();
+	private List<Lesson> lessons = new ArrayList<Lesson>();
 
 	public Student() {
 		super();
-		this.institution = null;
-		this.lessons = null;
 	}
 
 	public Student(String email) {
@@ -19,26 +17,19 @@ public class Student extends User {
 
 	public Student(String name, String email) {
 		super(name, email);
-		this.institution = null;
-		this.lessons = null;
 	}
 
 	public Student(String name, String email, UserType type) {
 		super(name, email, type);
-		this.institution = null;
-		this.lessons = null;
 	}
 
 	public Student(String name, String email, UserType type, boolean active) {
 		super(name, email, type, active);
-		this.institution = null;
-		this.lessons = null;
 	}
 
 	public Student(String name, String email, UserType type, boolean active, Institution institutions) {
 		super(name, email, type, active);
 		this.institution = institutions;
-		this.lessons = null;
 	}
 
 	public Student(String name, String email, UserType type, boolean active, Institution institutions,
@@ -50,14 +41,10 @@ public class Student extends User {
 
 	public Student(String name, String email, int id, UserType type, boolean active) {
 		super(name, email, id, type, active);
-		this.institution = null;
-		this.lessons = null;
 	}
 
 	public Student(User user) {
 		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
-		this.institution = null;
-		this.lessons = null;
 	}
 
 	public Student(String name, String email, int id, UserType type, boolean active, Institution institutions,

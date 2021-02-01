@@ -6,11 +6,10 @@ import classes.Institution;
 import classes.Lesson;
 
 public class InstitutionAdmin extends User {
-	private Institution institution;
+	private Institution institution = new Institution();
 
 	public InstitutionAdmin() {
 		super();
-		this.institution = null;
 	}
 
 	public InstitutionAdmin(String email) {
@@ -19,17 +18,14 @@ public class InstitutionAdmin extends User {
 
 	public InstitutionAdmin(String name, String email) {
 		super(name, email);
-		this.institution = null;
 	}
 
 	public InstitutionAdmin(String name, String email, UserType type) {
 		super(name, email, type);
-		this.institution = null;
 	}
 
 	public InstitutionAdmin(String name, String email, UserType type, boolean active) {
 		super(name, email, type, active);
-		this.institution = null;
 	}
 
 	public InstitutionAdmin(String name, String email, UserType type, boolean active, Institution institutions) {
@@ -39,12 +35,10 @@ public class InstitutionAdmin extends User {
 
 	public InstitutionAdmin(String name, String email, int id, UserType type, boolean active) {
 		super(name, email, id, type, active);
-		this.institution = null;
 	}
 
 	public InstitutionAdmin(User user) {
 		super(user.getName(), user.getEmail(), user.getId(), user.getType(), user.isActive());
-		this.institution = null;
 	}
 
 	public InstitutionAdmin(String name, String email, int id, UserType type, boolean active,

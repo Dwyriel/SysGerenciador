@@ -1,46 +1,31 @@
 package classes.users;
 
 public class User {
-	private int id;
-	private String name;
-	private String email;
-	private UserType type;
-	private boolean active;
+	private int id = -1;
+	private String name = "";
+	private String email = "";
+	private UserType type = UserType.None;
+	private boolean active = false;
 
 	public User() {
-		this.id = -1;
-		this.name = null;
-		this.email = null;
-		this.type = UserType.None;
-		this.active = false;
 	}
 
 	public User(String email) {
-		this.id = -1;
-		this.name = null;
 		this.email = email;
-		this.type = UserType.None;
-		this.active = false;
 	}
 
 	public User(String name, String email) {
-		this.id = -1;
 		this.name = name;
 		this.email = email;
-		this.type = UserType.None;
-		this.active = false;
 	}
 
 	public User(String name, String email, UserType type) {
-		this.id = -1;
 		this.name = name;
 		this.email = email;
 		this.type = type;
-		this.active = false;
 	}
 
 	public User(String name, String email, UserType type, boolean active) {
-		this.id = -1;
 		this.name = name;
 		this.email = email;
 		this.type = type;
