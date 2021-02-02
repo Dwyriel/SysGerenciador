@@ -18,8 +18,10 @@ public class RegLesson extends HttpServlet {
 		super();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Institution institution = InstitutionDAL.getInstitution(Integer.parseInt(request.getParameter("InstitutionId")));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Institution institution = InstitutionDAL
+				.getInstitution(Integer.parseInt(request.getParameter("InstitutionId")));
 		User user = null;
 		if (request.getParameter("Teacher") != null) {
 			user = UserDAL.getUser(request.getParameter("Teacher"));
@@ -32,17 +34,16 @@ public class RegLesson extends HttpServlet {
 		}
 		if (teacher != null) {
 			teacher.setType(UserType.Teacher);
-			if (UserDAL.deleteUserRelations(teacher.getId()))
-				if (UserDAL.updateUser(teacher)) {
-					lesson = new Lesson(lessonName, teacher, institution);
-					lesson = LessonDAL.insertLesson(lesson);
-					TeacherLessonDAL.insertTeacherLesson(teacher.getId(), lesson.getId());
-				}
+			if (UserDAL.updateUser(teacher)) {
+				lesson = new Lesson(lessonName, teacher, institution);
+				lesson = LessonDAL.insertLesson(lesson);
+				TeacherLessonDAL.insertTeacherLesson(teacher.getId(), lesson.getId());
+			}
 		} else {
 			lesson = new Lesson(lessonName, institution);
 			lesson = LessonDAL.insertLesson(lesson);
 		}
-		response.sendRedirect(request.getContextPath() + "/InstituPage?id="+institution.getId());
+		response.sendRedirect(request.getContextPath() + "/InstituPage?id=" + institution.getId());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
