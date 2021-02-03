@@ -23,7 +23,7 @@ public class LessonStudentDAL {
 		}
 	}
 
-	public static boolean deleteTeacherLesson(int student_id, int lesson_id) {
+	public static boolean deleteLessonStudent(int student_id, int lesson_id) {
 		try {
 			Connection connection = Conexao.getConnection();
 			PreparedStatement statement = connection
