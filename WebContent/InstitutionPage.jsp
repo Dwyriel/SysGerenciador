@@ -15,7 +15,7 @@
 		if (user.getType() == UserType.InstitutionAdmin || user.getType() == UserType.ServerAdmin) {
 			if (user.getType() == UserType.ServerAdmin || (admin != null && admin.getInstitution().getId() == institution.getId())) {
 				%>
-				<a href="#">Editar instituição</a> <br>
+				<a href="<%=request.getContextPath()%>/EditInstitution?id=<%=institution.getId()%>">Editar instituição</a> <br>
 				<a href="<%=request.getContextPath()%>/RegLesson?id=<%=institution.getId()%>">Nova turma</a><br>
 				<%
 			}
