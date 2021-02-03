@@ -3,6 +3,7 @@ package classes.users;
 import java.util.*;
 import classes.*;
 
+//TODO refazer aluno para ter apenas uma instituição
 public class Student extends User {
 	private Institution institution = new Institution();
 	private List<Lesson> lessons = new ArrayList<Lesson>();

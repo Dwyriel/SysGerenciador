@@ -50,6 +50,7 @@
 						ID:	<%=lesson.getId()%></p>
 						<%if (user.getType()==UserType.ServerAdmin || (admin != null && admin.getInstitution().getId() == institution.getId())) { %>
 					<a class="btn btn-primary" href="<%=request.getContextPath()%>/AddStudent?id=<%=lesson.getId()%>">Adicionar aluno</a>
+					<a class="btn btn-primary" href="<%=request.getContextPath()%>/RemoveStudent?id=<%=lesson.getId()%>">Remover aluno</a>
 					<a class="btn btn-primary" href="<%=request.getContextPath()%>/EditLesson?id=<%=lesson.getId()%>">Editar aula</a>
 					<% } %>
 					<a class="btn btn-primary" href="<%=request.getContextPath()%>/LessonPage?id=<%=lesson.getId()%>">Entrar</a>
