@@ -11,8 +11,7 @@
 			return;
 			}	
 
-		User user = (User)session.getAttribute("user");
-					 
+		User user = (User)session.getAttribute("user");			 
 					 %>
 
 <!DOCTYPE html>
@@ -43,14 +42,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          
+          <% if(user.getType() == UserType.Teacher) { %>
           <li class="nav-item">
-     		<% if(user.getType() == UserType.Teacher) { %>
             <a class="nav-link" href="Institution.jsp">Instituições</a>
-            <% } if (user.getType() == UserType.ServerAdmin) { %>
-            <a class="nav-link" href="AdminPainel.jsp">Painel do Admin</a>
-            <% } %>
           </li>
+          <% } %>
+           <%  if (user.getType() == UserType.ServerAdmin) { %>
+          <li>
+          	<a class="nav-link" href="AdminPainel.jsp">Lista de instituições</a>
+          </li>
+          <li>
+          	<a class="nav-link" href="ListAllUsers.jsp">Lista de usuarios</a>
+          </li>
+           <% } %>
          	<li>
          	<% if(user.getType() == UserType.ServerAdmin || user.getType() == UserType.InstitutionAdmin) { %>
             <a class="nav-link" href="Register.jsp">Registro de Usuários</a>

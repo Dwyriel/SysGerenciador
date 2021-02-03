@@ -5,9 +5,9 @@
 }
 	%>
 <body>
-	<div class="container">
-		<a class="btn" href="<%=request.getContextPath()%>/Register_Institution.jsp">New Institution</a>
-		<div class="text-center">
+	<div class="container" style="margin-top: 10px">
+		<a class="btn btn-secondary" href="<%=request.getContextPath()%>/Register_Institution.jsp">Nova Instituição</a>
+		<div class="text-center" style="margin-top: 10px">
 			<%
 			List<Institution> institutionList = InstitutionDAL.getAllInstitutions();
 			if (!institutionList.isEmpty())

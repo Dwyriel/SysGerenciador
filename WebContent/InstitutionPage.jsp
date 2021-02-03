@@ -1,5 +1,6 @@
 <%@ include file="header.jsp" %>
 <body>
+<div class="container">
 	<%
 	if ((Institution)request.getAttribute("Institution") == null) {
 		response.sendRedirect(request.getContextPath() + "/Institution.jsp");
@@ -47,6 +48,7 @@
 			}
 		}
 		%>
-	
+
+</div>
 </body>
 </html>

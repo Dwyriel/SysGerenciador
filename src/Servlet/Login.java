@@ -45,6 +45,7 @@ public class Login extends HttpServlet {
         session.setAttribute("user",user);
 		System.out.println(user);
 		
+		if(user.isActive()==true) {
 		if(user.getType() == UserType.ServerAdmin) {
 			 
 			 response.sendRedirect(request.getContextPath() + "/AdminPainel.jsp");
@@ -62,6 +63,12 @@ public class Login extends HttpServlet {
    			response.sendRedirect(request.getContextPath() + "/InstituPage?id="+ LessonStudentDAL.getLessonsByStudent(user.getId()).get(0).getInstitution().getId());
    		 } else {
    			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");
-   		 }
+   		 } 
+		} else {
+			String text ="Conta desativada";
+			request.setAttribute("Text", text);
+			request.getRequestDispatcher("/inativeAccount.jsp").include(request, response);
+			return;
+		}
 	}
 }
