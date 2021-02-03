@@ -22,53 +22,41 @@ public class Login extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User user = new User();
-		
-		
 		String password = (request.getParameter("UserPassword"));
 		user = UserDAL.getUser(request.getParameter("UserEmail"));
-				
-		if(user == null){ 
-			
-			String msg ="Email Inválida ou inexistente";
+		if (user == null) {
+			String msg = "Email Inválida ou inexistente";
 			request.setAttribute("Msg", msg);
 			request.getRequestDispatcher("/Login.jsp").include(request, response);
 			return;
-			
-		} 
+		}
 		if (!UserDAL.userAutentication(user, password)) {
-			String msg ="Senha Inválida";
+			String msg = "Senha Inválida";
 			request.setAttribute("Msg", msg);
 			request.getRequestDispatcher("/Login.jsp").include(request, response);
 			return;
-		} 
-		HttpSession session=request.getSession();
-        session.setAttribute("user",user);
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute("user", user);
 		System.out.println(user);
-		
-		if(user.isActive()==true) {
-		if(user.getType() == UserType.ServerAdmin) {
-			 
-			 response.sendRedirect(request.getContextPath() + "/AdminPainel.jsp");
-			 
-         }  else if (user.getType() == UserType.InstitutionAdmin){
-     
-        	 response.sendRedirect(request.getContextPath() + "/InstituPage?id="+AdminDAL.getAdmin(user.getId()).getInstitution().getId());
-  
-   		 }  else if (user.getType() == UserType.Teacher){
-   			 
-   			response.sendRedirect(request.getContextPath() + "/Institution.jsp");
-         
-   		 } else if (user.getType() == UserType.Student){   
-   			 
-   			response.sendRedirect(request.getContextPath() + "/InstituPage?id="+ LessonStudentDAL.getLessonsByStudent(user.getId()).get(0).getInstitution().getId());
-   		 } else {
-   			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");
-   		 } 
-		} else {
-			String text ="Conta desativada";
+		if (!user.isActive()) {
+			String text = "Conta desativada";
 			request.setAttribute("Text", text);
 			request.getRequestDispatcher("/inativeAccount.jsp").include(request, response);
 			return;
+		}
+		if (user.getType() == UserType.ServerAdmin) {
+			response.sendRedirect(request.getContextPath() + "/AdminPainel.jsp");
+		} else if (user.getType() == UserType.InstitutionAdmin) {
+			response.sendRedirect(request.getContextPath() + "/InstituPage?id="
+					+ AdminDAL.getAdmin(user.getId()).getInstitution().getId());
+		} else if (user.getType() == UserType.Teacher) {
+			response.sendRedirect(request.getContextPath() + "/Institution.jsp");
+		} else if (user.getType() == UserType.Student) {
+			response.sendRedirect(request.getContextPath() + "/InstituPage?id="
+					+ LessonStudentDAL.getLessonsByStudent(user.getId()).get(0).getInstitution().getId());
+		} else {
+			response.sendRedirect(request.getContextPath() + "/ERROR.jsp");
 		}
 	}
 }
