@@ -44,7 +44,7 @@
 				   		
 				   </select>
 		   	</div>	
-	            <button type="submit" class="btn btn-black">Cadastrar</button>
+	            <button type="submit" class="btn btn-primary">Cadastrar</button>
 	            <a type="submit" class="btn btn-secondary" href="Login.jsp">Voltar</a>
 	         </form>
 	      </div>

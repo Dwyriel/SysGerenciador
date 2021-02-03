@@ -1,5 +1,6 @@
 <%@ include file="header.jsp" %>
 <body>
+<div class="container">
 	<%
 	if ((Institution)request.getAttribute("Institution") == null) {
 		response.sendRedirect(request.getContextPath() + "/Institution.jsp");
@@ -14,14 +15,14 @@
 		if (user.getType() == UserType.InstitutionAdmin || user.getType() == UserType.ServerAdmin) {
 			if (user.getType() == UserType.ServerAdmin || (admin != null && admin.getInstitution().getId() == institution.getId())) {
 				%>
-				<a href="#">Editar instituição</a> <br>
+				<a href="#">Editar instituiÃ§Ã£o</a> <br>
 				<a href="<%=request.getContextPath()%>/RegLesson?id=<%=institution.getId()%>">Nova turma</a><br>
 				<%
 			}
 		}
 		if (institution.getClasses() == null || (institution.getClasses() != null && institution.getClasses().isEmpty())) {
 		%>
-		<span>Esta instituição nao possui classes ainda.</span>
+		<span>Esta instituiÃ§Ã£o nao possui classes ainda.</span>
 		<%
 		} else {
 			List<Lesson> listLesson = new ArrayList<Lesson>();
@@ -37,13 +38,13 @@
 					break;
 			}
 			if(listLesson.isEmpty())
-				%> <span>Você não participa de nenhuma aula dessa instituição.</span> <%
+				%> <span>VocÃª nÃ£o participa de nenhuma aula dessa instituiÃ§Ã£o.</span> <%
 		for (Lesson lesson : listLesson) {
 			if(!lesson.isActive())
 				continue;
 			lesson.setStudents(LessonStudentDAL.getStudentsByLesson(lesson.getId()));
 		%>
-			<div class="card" style="width: 18rem;">
+    <div class="card" style="width: 18rem;">
 				<div class="card-body">
 					<h5 class="card-title"><%=lesson.getName()%></h5>
 					<p class="card-text">
@@ -58,6 +59,5 @@
 			</div>
 		<% }
 		} %> 
-	
 </body>
 </html>
