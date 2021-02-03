@@ -22,43 +22,12 @@ public class disableUser extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User disableUser = new User();
-		
 		disableUser = UserDAL.getUser(Integer.parseInt(request.getParameter("id")));
-		
-		if (disableUser.isActive() == true) {
-		User Userdisable = new User(
-				disableUser.getName(),
-				disableUser.getEmail(),
-				disableUser.getId(),
-				disableUser.getType(), false);
-		
-		UserDAL.updateUser(Userdisable);
-
-		String alert="Conta desativada";
-		
+		disableUser.setActive(!disableUser.isActive());
+		UserDAL.updateUser(disableUser);
+		String alert= (disableUser.isActive()) ? "Conta reativada" : "Conta desativada";
 		request.setAttribute("Alert", alert);
-		
 		request.getRequestDispatcher("/ListAllUsers.jsp").include(request, response);
-		return;
-		}
-		if (disableUser.isActive() == false) {
-			User Userdisable = new User(
-					disableUser.getName(),
-					disableUser.getEmail(),
-					disableUser.getId(),
-					disableUser.getType(), true);
-			
-			UserDAL.updateUser(Userdisable);
-
-			String alert="Conta reativada";
-			
-			request.setAttribute("Alert", alert);
-			
-			request.getRequestDispatcher("/ListAllUsers.jsp").include(request, response);
-			return;
-			}
-		
-		
 	}
 
 }
