@@ -114,7 +114,7 @@ public class LessonDAL {
 			statement.setInt(1, intitution_id);
 			ResultSet resultSet = statement.executeQuery();
 			Lesson lesson = null;
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				lesson = new Lesson(resultSet.getInt("id"), resultSet.getString("name"),
 						UserDAL.getUser(resultSet.getInt("teacher_id")),
 						InstitutionDAL.getInstitution(resultSet.getInt("institution_id")),

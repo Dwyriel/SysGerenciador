@@ -27,6 +27,8 @@
 		<%
 		} else
 		for (Lesson lesson : institution.getClasses()) {
+			if(!lesson.isActive())
+				continue;
 			lesson.setStudents(LessonStudentDAL.getStudentsByLesson(lesson.getId()));
 		%>
 		<p>

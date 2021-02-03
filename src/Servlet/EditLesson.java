@@ -32,16 +32,16 @@ public class EditLesson extends HttpServlet {
 		}
 		if (teacher != null) {
 			teacher.setType(UserType.Teacher);
-			if (UserDAL.deleteUserRelations(teacher.getId()))
-				if (UserDAL.updateUser(teacher)) {
-					if (lesson.getTeacher() != null)
-						TeacherLessonDAL.deleteTeacherLesson(lesson.getTeacher().getId(), lesson.getId());
-					lesson = new Lesson(lesson.getName(), teacher, lesson.getInstitution());
-					if (LessonDAL.updateLesson(lesson))
-						TeacherLessonDAL.insertTeacherLesson(teacher.getId(), lesson.getId());
-				}
+			if (UserDAL.updateUser(teacher)) {
+				if (lesson.getTeacher() != null || lesson.getTeacher().getId() != -1)
+					TeacherLessonDAL.deleteTeacherLesson(lesson.getTeacher().getId(), lesson.getId());
+				System.out.println("No errors yet " + teacher.getId() + " - " + lesson.getId());
+				lesson.setTeacher(teacher);;
+				if (LessonDAL.updateLesson(lesson))
+					TeacherLessonDAL.insertTeacherLesson(teacher.getId(), lesson.getId());
+			}
 		} else {
-			lesson = new Lesson(lesson.getName(), lesson.getInstitution());
+			lesson.setTeacher(new User());
 			LessonDAL.updateLesson(lesson);
 		}
 		response.sendRedirect(request.getContextPath() + "/InstituPage?id=" + lesson.getInstitution().getId());
