@@ -28,7 +28,7 @@ public class Delbyid extends HttpServlet {
 	
 		request.setAttribute("Alert", alert);
 		
-		request.getRequestDispatcher("/ListAllUsers.jsp").include(request, response);
+		request.getRequestDispatcher("/Login.jsp").include(request, response);
 		return;
 		
 	}

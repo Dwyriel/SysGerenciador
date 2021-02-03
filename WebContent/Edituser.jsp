@@ -54,7 +54,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
-        <a type="button" class="btn btn-secondary" href="DelUser">Sim</a>
+        <a type="button" class="btn btn-secondary" href="<%=request.getContextPath()%>/Delbyid?id=<%=user.getId()%>">Sim</a>
       </div>
     </div>
   </div>
