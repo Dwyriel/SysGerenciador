@@ -11,7 +11,23 @@
 	<div class="container">
 		<div class="text-center">
 			<%
-			List<Institution> institutionList = InstitutionDAL.getAllInstitutions();
+			List<Institution> institutionList = new ArrayList<Institution>();
+			if(user.getType() == UserType.Teacher){
+				List<Lesson> lessonList = TeacherLessonDAL.getLessonsByTeacher(user.getId());
+				for(Lesson lesson : lessonList){
+					boolean equals = false;
+					for(Institution institution : institutionList){
+						if(lesson.getInstitution().getId() == institution.getId()){
+							equals = true;
+							break;
+						}
+					}
+					if(equals)
+						continue;
+					institutionList.add(lesson.getInstitution());
+				}
+			}else
+				institutionList = InstitutionDAL.getAllInstitutions();
 			if (institutionList != null || !institutionList.isEmpty())
 				for (Institution institution : institutionList) {
 			%>
