@@ -2,6 +2,17 @@
     pageEncoding="ISO-8859-1"%>
      <%@ page import="javax.servlet.http.*,classes.*,classes.users.*, java.lang.*, DAL.*, java.util.ArrayList, java.util.List"  
   %>
+  <%
+
+		if(session.getAttribute("user") == null) {
+			String alert ="Você precisa estar logado";
+			request.setAttribute("Alert", alert);
+			request.getRequestDispatcher("/Login.jsp").include(request, response);
+			return;
+			}	
+
+		User user = (User)session.getAttribute("user");			 
+					 %>
   <% String text = null; if(request.getAttribute("Text") != null ) { text = (String)request.getAttribute("Text"); 
 	request.setAttribute("Text", null);}; %>
 <!DOCTYPE html>
@@ -19,7 +30,7 @@
 <div class="container">
 <h1><%= text %></h1>
 <a type="button" class="btn btn-secondary" href="<%=request.getContextPath()%>/Logout">Desconectar</a>
-<a type="button" class="btn btn-secondary" href="DelUser">Deletar Conta</a>
+<a type="button" class="btn btn-secondary" href="<%=request.getContextPath()%>/Delbyid?id=<%=user.getId()%>">Deletar Conta</a>
 </div>
 </body>
 </html>

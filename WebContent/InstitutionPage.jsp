@@ -15,14 +15,14 @@
 		if (user.getType() == UserType.InstitutionAdmin || user.getType() == UserType.ServerAdmin) {
 			if (user.getType() == UserType.ServerAdmin || (admin != null && admin.getInstitution().getId() == institution.getId())) {
 				%>
-				<a class="btn btn-primary" href="<%=request.getContextPath()%>/EditInstitution?id=<%=institution.getId()%>">Editar instituição</a> <br>
-				<a class="btn btn-primary" href="<%=request.getContextPath()%>/RegLesson?id=<%=institution.getId()%>">Nova turma</a><br>
+				<a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/EditInstitution?id=<%=institution.getId()%>">Editar instituição</a> <br>
+				<a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/RegLesson?id=<%=institution.getId()%>">Nova turma</a><br>
 				<%
 			}
 		}
 		if (institution.getClasses() == null || (institution.getClasses() != null && institution.getClasses().isEmpty())) {
 		%>
-		<span>Esta instituiÃ§Ã£o nao possui classes ainda.</span>
+		<span>Esta instituição não possui classes ainda.</span>
 		<%
 		} else {
 			List<Lesson> listLesson = new ArrayList<Lesson>();
@@ -38,7 +38,7 @@
 					break;
 			}
 			if(listLesson.isEmpty())
-				%> <span>VocÃª nÃ£o participa de nenhuma aula dessa instituiÃ§Ã£o.</span> <%
+				%> <span>Você não participa de nenhuma aula dessa instituição.</span> <%
 		for (Lesson lesson : listLesson) {
 			if(!lesson.isActive())
 				continue;
@@ -50,11 +50,11 @@
 					<p class="card-text">
 						ID:	<%=lesson.getId()%></p>
 						<%if (user.getType()==UserType.ServerAdmin || (admin != null && admin.getInstitution().getId() == institution.getId())) { %>
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/AddStudent?id=<%=lesson.getId()%>">Adicionar aluno</a>
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/RemoveStudent?id=<%=lesson.getId()%>">Remover aluno</a>
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/EditLesson?id=<%=lesson.getId()%>">Editar aula</a>
+					<a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/AddStudent?id=<%=lesson.getId()%>">Adicionar aluno</a>
+					<a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/RemoveStudent?id=<%=lesson.getId()%>">Remover aluno</a>
+					<a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/EditLesson?id=<%=lesson.getId()%>">Editar aula</a>
 					<% } %>
-					<a class="btn btn-primary" href="<%=request.getContextPath()%>/LessonPage?id=<%=lesson.getId()%>">Entrar</a>
+					<a class="btn btn-primary m-1" href="<%=request.getContextPath()%>/LessonPage?id=<%=lesson.getId()%>">Entrar</a>
 				</div>
 			</div>
 		<% }
